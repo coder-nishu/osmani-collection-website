@@ -8,7 +8,8 @@
     "notes": ["Bergamot", "Pepper", "Ambroxan"],
     "projection": "Strong",
     "longevity": "6-8 hours",
-    "image": "/images/perfumes/sauvage.jpg",
+    "seasons": ["spring", "summer", "day"],
+    "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg",
     "pricing": [
       { "size": "50ml", "price": 1200 },
       { "size": "100ml", "price": 2200 }
@@ -23,7 +24,8 @@
     "notes": ["Aquatic", "Sweet", "Citrus"],
     "projection": "Moderate",
     "longevity": "6-7 hours",
-    "image": "/images/perfumes/hawas.jpg",
+    "seasons": ["summer", "day"],
+    "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg",
     "pricing": [
       { "size": "50ml", "price": 1100 },
       { "size": "100ml", "price": 2000 }
@@ -38,7 +40,8 @@
     "notes": ["Citrus", "Neroli", "Woody"],
     "projection": "Moderate",
     "longevity": "5-6 hours",
-    "image": "/images/perfumes/dunhill.jpg",
+    "seasons": ["spring", "day"],
+    "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg",
     "pricing": [
       { "size": "50ml", "price": 1000 },
       { "size": "100ml", "price": 1800 }
@@ -53,7 +56,8 @@
     "notes": ["Oud", "Sandalwood", "Amber"],
     "projection": "Strong",
     "longevity": "8 hours",
-    "image": "/images/perfumes/oud_wood.jpg",
+    "seasons": ["winter", "fall", "night"],
+    "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg",
     "pricing": [
       { "size": "50ml", "price": 1500 },
       { "size": "100ml", "price": 2800 }
@@ -68,7 +72,8 @@
     "notes": ["Lavender", "Fresh", "Green"],
     "projection": "Soft",
     "longevity": "5 hours",
-    "image": "/images/perfumes/lavender.jpg",
+    "seasons": ["spring", "summer", "day"],
+    "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg",
     "pricing": [
       { "size": "50ml", "price": 900 },
       { "size": "100ml", "price": 1600 }
@@ -83,7 +88,8 @@
     "notes": ["Musk", "Floral", "Powdery"],
     "projection": "Moderate",
     "longevity": "6-7 hours",
-    "image": "/images/perfumes/narciso.jpg",
+    "seasons": ["spring", "day", "night"],
+    "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg",
     "pricing": [
       { "size": "50ml", "price": 1200 },
       { "size": "100ml", "price": 2100 }

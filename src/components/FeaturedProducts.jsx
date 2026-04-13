@@ -7,6 +7,7 @@ export default function FeaturedProducts({
   buttonLabel,
   buttonHref,
   showBestSellerTag = false,
+  buttonBelow = false,
 }) {
   return (
     <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-10 lg:py-16">
@@ -16,16 +17,18 @@ export default function FeaturedProducts({
           <h2 className="font-heading mt-2 text-4xl text-[color:var(--color-primary)] sm:text-5xl">{title}</h2>
           {subtitle ? <p className="mt-3 text-sm text-[color:var(--color-primary)]/70">{subtitle}</p> : null}
         </div>
-        <a href={buttonHref} className="btn-brand-outline">
-          {buttonLabel}
-        </a>
+        {!buttonBelow ? (
+          <a href={buttonHref} className="btn-brand-outline">
+            {buttonLabel}
+          </a>
+        ) : null}
       </div>
 
-      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="flex gap-5 overflow-x-auto pb-2 sm:grid sm:grid-cols-2 sm:overflow-visible sm:pb-0 lg:grid-cols-4">
         {products.map((product) => (
           <article
             key={product.id}
-            className="group overflow-hidden rounded-2xl border border-[color:var(--color-primary)]/10 bg-[color:var(--color-bg)]"
+            className="group min-w-[78%] snap-start overflow-hidden rounded-2xl border border-[color:var(--color-primary)]/10 bg-[color:var(--color-bg)] sm:min-w-0"
           >
             <div className="relative overflow-hidden">
               <img
@@ -49,6 +52,14 @@ export default function FeaturedProducts({
           </article>
         ))}
       </div>
+
+      {buttonBelow ? (
+        <div className="mt-8 flex justify-center sm:justify-start">
+          <a href={buttonHref} className="btn-brand-outline">
+            {buttonLabel}
+          </a>
+        </div>
+      ) : null}
     </section>
   );
 }

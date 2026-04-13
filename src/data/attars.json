@@ -8,7 +8,8 @@
     "notes": ["White Musk", "Powdery", "Fresh"],
     "projection": "Soft",
     "longevity": "6-8 hours",
-    "image": "https://via.placeholder.com/300x300?text=Misk+Al+Tahara",
+    "seasons": ["spring", "day"],
+    "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg",
     "pricing": [
       { "size": "3ml", "price": 300 },
       { "size": "6ml", "price": 550 },
@@ -24,7 +25,8 @@
     "notes": ["Oud", "Spicy", "Woody"],
     "projection": "Strong",
     "longevity": "10-12 hours",
-    "image": "https://via.placeholder.com/300x300?text=Khanjar",
+    "seasons": ["fall", "winter", "night"],
+    "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg",
     "pricing": [
       { "size": "3ml", "price": 350 },
       { "size": "6ml", "price": 650 },
@@ -40,7 +42,8 @@
     "notes": ["Amber", "Sweet", "Woody"],
     "projection": "Strong",
     "longevity": "12+ hours",
-    "image": "https://via.placeholder.com/300x300?text=Bakarat+Rouje",
+    "seasons": ["winter", "night"],
+    "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg",
     "pricing": [
       { "size": "3ml", "price": 400 },
       { "size": "6ml", "price": 800 },
@@ -56,7 +59,8 @@
     "notes": ["Amber", "Spicy", "Sweet"],
     "projection": "Strong",
     "longevity": "10-12 hours",
-    "image": "https://via.placeholder.com/300x300?text=Mukhallat+Ahmar",
+    "seasons": ["winter", "fall", "night"],
+    "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg",
     "pricing": [
       { "size": "3ml", "price": 590 },
       { "size": "6ml", "price": 1070 },
@@ -72,7 +76,8 @@
     "notes": ["Lavender", "Oud", "Fresh"],
     "projection": "Moderate",
     "longevity": "8-10 hours",
-    "image": "https://via.placeholder.com/300x300?text=Oud+Lavender",
+    "seasons": ["spring", "summer", "day"],
+    "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg",
     "pricing": [
       { "size": "3ml", "price": 350 },
       { "size": "6ml", "price": 650 },
@@ -88,7 +93,25 @@
     "notes": ["Musk", "Floral", "Powdery"],
     "projection": "Moderate",
     "longevity": "8 hours",
-    "image": "https://via.placeholder.com/300x300?text=Narciso",
+    "seasons": ["spring", "day", "night"],
+    "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg",
+    "pricing": [
+      { "size": "3ml", "price": 390 },
+      { "size": "6ml", "price": 750 },
+      { "size": "12ml", "price": 1390 }
+    ]
+  },
+  {
+    "id": "attar_007",
+    "name": "dtfsgdfg Inspired",
+    "type": "attar",
+    "category": "premium",
+    "description": "Elegant musky floral scent inspired by Narciso style.",
+    "notes": ["Musk", "Floral", "Powdery"],
+    "projection": "Moderate",
+    "longevity": "8 hours",
+    "seasons": ["spring", "day", "night"],
+    "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg",
     "pricing": [
       { "size": "3ml", "price": 390 },
       { "size": "6ml", "price": 750 },

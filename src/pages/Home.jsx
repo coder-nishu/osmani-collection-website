@@ -25,6 +25,7 @@ export default function Home() {
         products={featuredAttars}
         buttonLabel="Explore All Attars"
         buttonHref="/attar"
+        buttonBelow
       />
 
       <FeaturedProducts

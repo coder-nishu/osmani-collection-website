@@ -11,10 +11,10 @@ export default function FilterBar({ activeFilter, onFilterChange, sortBy, onSort
               key={option}
               type="button"
               onClick={() => onFilterChange(option)}
-              className={`rounded-full border px-4 py-2 text-xs uppercase tracking-[0.18em] transition-colors duration-300 ${
+              className={`rounded-full border border-[color:var(--color-primary)] bg-[color:var(--color-primary)] px-4 py-2 text-xs uppercase tracking-[0.18em] text-[color:var(--color-accent)] transition-all duration-300 ${
                 isActive
-                  ? "border-[color:var(--color-accent)] bg-[color:var(--color-accent)] text-[color:var(--color-primary)]"
-                  : "border-[color:var(--color-primary)]/20 text-[color:var(--color-primary)]/75 hover:border-[color:var(--color-accent)] hover:text-[color:var(--color-accent)]"
+                  ? "ring-2 ring-[color:var(--color-accent)]/55"
+                  : "opacity-85 hover:-translate-y-0.5 hover:opacity-100"
               }`}
             >
               {option}

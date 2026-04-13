@@ -1,0 +1,92 @@
+[
+  {
+    "id": "perfume_001",
+    "name": "Dior Sauvage Inspired",
+    "type": "perfume",
+    "category": "platinum",
+    "description": "Fresh spicy fragrance inspired by Dior Sauvage.",
+    "notes": ["Bergamot", "Pepper", "Ambroxan"],
+    "projection": "Strong",
+    "longevity": "6-8 hours",
+    "image": "/images/perfumes/sauvage.jpg",
+    "pricing": [
+      { "size": "50ml", "price": 1200 },
+      { "size": "100ml", "price": 2200 }
+    ]
+  },
+  {
+    "id": "perfume_002",
+    "name": "Rasasi Hawas Inspired",
+    "type": "perfume",
+    "category": "premium",
+    "description": "Fresh aquatic sweet fragrance inspired by Hawas.",
+    "notes": ["Aquatic", "Sweet", "Citrus"],
+    "projection": "Moderate",
+    "longevity": "6-7 hours",
+    "image": "/images/perfumes/hawas.jpg",
+    "pricing": [
+      { "size": "50ml", "price": 1100 },
+      { "size": "100ml", "price": 2000 }
+    ]
+  },
+  {
+    "id": "perfume_003",
+    "name": "Dunhill Icon Inspired",
+    "type": "perfume",
+    "category": "premium",
+    "description": "Elegant citrus woody fragrance for modern men.",
+    "notes": ["Citrus", "Neroli", "Woody"],
+    "projection": "Moderate",
+    "longevity": "5-6 hours",
+    "image": "/images/perfumes/dunhill.jpg",
+    "pricing": [
+      { "size": "50ml", "price": 1000 },
+      { "size": "100ml", "price": 1800 }
+    ]
+  },
+  {
+    "id": "perfume_004",
+    "name": "Oud Wood Inspired",
+    "type": "perfume",
+    "category": "platinum",
+    "description": "Luxurious woody oud fragrance inspired by Tom Ford Oud Wood.",
+    "notes": ["Oud", "Sandalwood", "Amber"],
+    "projection": "Strong",
+    "longevity": "8 hours",
+    "image": "/images/perfumes/oud_wood.jpg",
+    "pricing": [
+      { "size": "50ml", "price": 1500 },
+      { "size": "100ml", "price": 2800 }
+    ]
+  },
+  {
+    "id": "perfume_005",
+    "name": "Lavender Fresh",
+    "type": "perfume",
+    "category": "premium",
+    "description": "Clean fresh lavender fragrance for everyday wear.",
+    "notes": ["Lavender", "Fresh", "Green"],
+    "projection": "Soft",
+    "longevity": "5 hours",
+    "image": "/images/perfumes/lavender.jpg",
+    "pricing": [
+      { "size": "50ml", "price": 900 },
+      { "size": "100ml", "price": 1600 }
+    ]
+  },
+  {
+    "id": "perfume_006",
+    "name": "Narciso Inspired",
+    "type": "perfume",
+    "category": "premium",
+    "description": "Soft musky floral fragrance inspired by Narciso.",
+    "notes": ["Musk", "Floral", "Powdery"],
+    "projection": "Moderate",
+    "longevity": "6-7 hours",
+    "image": "/images/perfumes/narciso.jpg",
+    "pricing": [
+      { "size": "50ml", "price": 1200 },
+      { "size": "100ml", "price": 2100 }
+    ]
+  }
+]

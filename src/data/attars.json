@@ -1,0 +1,98 @@
+[
+  {
+    "id": "attar_001",
+    "name": "Misk Al Tahara",
+    "type": "attar",
+    "category": "premium",
+    "description": "Clean, soft and powdery musk fragrance perfect for daily wear.",
+    "notes": ["White Musk", "Powdery", "Fresh"],
+    "projection": "Soft",
+    "longevity": "6-8 hours",
+    "image": "https://via.placeholder.com/300x300?text=Misk+Al+Tahara",
+    "pricing": [
+      { "size": "3ml", "price": 300 },
+      { "size": "6ml", "price": 550 },
+      { "size": "12ml", "price": 990 }
+    ]
+  },
+  {
+    "id": "attar_002",
+    "name": "Khanjar",
+    "type": "attar",
+    "category": "premium",
+    "description": "Strong bold Arabian scent with deep woody and spicy notes.",
+    "notes": ["Oud", "Spicy", "Woody"],
+    "projection": "Strong",
+    "longevity": "10-12 hours",
+    "image": "https://via.placeholder.com/300x300?text=Khanjar",
+    "pricing": [
+      { "size": "3ml", "price": 350 },
+      { "size": "6ml", "price": 650 },
+      { "size": "12ml", "price": 1250 }
+    ]
+  },
+  {
+    "id": "attar_003",
+    "name": "Bakarat Rouje",
+    "type": "attar",
+    "category": "platinum",
+    "description": "Sweet luxurious fragrance inspired by Baccarat Rouge style.",
+    "notes": ["Amber", "Sweet", "Woody"],
+    "projection": "Strong",
+    "longevity": "12+ hours",
+    "image": "https://via.placeholder.com/300x300?text=Bakarat+Rouje",
+    "pricing": [
+      { "size": "3ml", "price": 400 },
+      { "size": "6ml", "price": 800 },
+      { "size": "12ml", "price": 1500 }
+    ]
+  },
+  {
+    "id": "attar_004",
+    "name": "Mukhallat Ahmar",
+    "type": "attar",
+    "category": "platinum",
+    "description": "Rich oriental blend with sweet and spicy depth.",
+    "notes": ["Amber", "Spicy", "Sweet"],
+    "projection": "Strong",
+    "longevity": "10-12 hours",
+    "image": "https://via.placeholder.com/300x300?text=Mukhallat+Ahmar",
+    "pricing": [
+      { "size": "3ml", "price": 590 },
+      { "size": "6ml", "price": 1070 },
+      { "size": "12ml", "price": 2000 }
+    ]
+  },
+  {
+    "id": "attar_005",
+    "name": "Oud Lavender",
+    "type": "attar",
+    "category": "premium",
+    "description": "A unique blend of fresh lavender with deep oud base.",
+    "notes": ["Lavender", "Oud", "Fresh"],
+    "projection": "Moderate",
+    "longevity": "8-10 hours",
+    "image": "https://via.placeholder.com/300x300?text=Oud+Lavender",
+    "pricing": [
+      { "size": "3ml", "price": 350 },
+      { "size": "6ml", "price": 650 },
+      { "size": "12ml", "price": 1200 }
+    ]
+  },
+  {
+    "id": "attar_006",
+    "name": "Narciso Inspired",
+    "type": "attar",
+    "category": "premium",
+    "description": "Elegant musky floral scent inspired by Narciso style.",
+    "notes": ["Musk", "Floral", "Powdery"],
+    "projection": "Moderate",
+    "longevity": "8 hours",
+    "image": "https://via.placeholder.com/300x300?text=Narciso",
+    "pricing": [
+      { "size": "3ml", "price": 390 },
+      { "size": "6ml", "price": 750 },
+      { "size": "12ml", "price": 1390 }
+    ]
+  }
+]

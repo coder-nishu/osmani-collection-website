@@ -60,7 +60,7 @@ export default function WhatsAppFloating() {
       <button
         type="button"
         onClick={() => setIsOpen(true)}
-        className="whatsapp-float-attention mt-3 inline-flex h-16 w-16 items-center justify-center rounded-full bg-[#25D366] shadow-[0_14px_28px_rgba(0,0,0,0.22)] transition-transform duration-300 hover:scale-105"
+        className="whatsapp-float-attention mt-3 inline-flex items-center gap-2 rounded-full bg-[#25D366] px-3 py-2 shadow-[0_14px_28px_rgba(0,0,0,0.22)] transition-transform duration-300 hover:scale-105"
         aria-label="Open WhatsApp chat"
       >
         <svg viewBox="0 0 32 32" className="h-8 w-8" aria-hidden="true">
@@ -73,6 +73,7 @@ export default function WhatsAppFloating() {
             d="M16 5.33c-5.88 0-10.67 4.78-10.67 10.67 0 1.88.5 3.73 1.45 5.36L5.33 26.67l5.43-1.42c1.58.86 3.36 1.31 5.24 1.31h.01c5.88 0 10.67-4.78 10.67-10.67 0-2.85-1.11-5.53-3.12-7.54-2.01-2.01-4.69-3.12-7.56-3.12Zm0 19.39h-.01c-1.62 0-3.2-.43-4.58-1.24l-.33-.2-3.22.84.86-3.14-.21-.32a8.85 8.85 0 0 1-1.35-4.72c0-4.89 3.98-8.87 8.88-8.87 2.37 0 4.59.92 6.27 2.6a8.8 8.8 0 0 1 2.59 6.26c0 4.89-3.98 8.88-8.88 8.88Z"
           />
         </svg>
+        <span className="pr-1 text-xs font-semibold tracking-wide text-white">Chat with us</span>
       </button>
     </div>
   );

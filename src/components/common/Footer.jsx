@@ -78,8 +78,8 @@ export default function Footer() {
               Contact & Social
             </h3>
             <div className="mt-4 space-y-2.5 text-sm text-[color:var(--color-bg)]/78">
-              <a href="https://wa.me/8801000000000" className="block transition-colors duration-300 hover:text-[color:var(--color-accent)]">
-                WhatsApp: +8801XXXXXXXXX
+              <a href="https://wa.me/8801338338537" className="block transition-colors duration-300 hover:text-[color:var(--color-accent)]">
+                WhatsApp: +8801338338537
               </a>
               <a href="mailto:hello@osmanicollection.com" className="block transition-colors duration-300 hover:text-[color:var(--color-accent)]">
                 hello@osmanicollection.com

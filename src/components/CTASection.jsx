@@ -18,7 +18,7 @@ export default function CTASection() {
             Shop Now
           </a>
           <a
-            href="https://wa.me/8801000000000"
+            href="https://wa.me/8801338338537"
             className="inline-flex items-center justify-center rounded-full border border-(--color-accent) px-7 py-3 text-xs uppercase tracking-[0.18em] text-(--color-accent) transition-all duration-300 hover:bg-(--color-accent) hover:text-(--color-primary)"
           >
             WhatsApp Order

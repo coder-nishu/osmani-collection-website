@@ -97,9 +97,9 @@ export default function Navbar() {
             >
               <CartIcon />
             </button>
-            <button type="button" className="btn-brand ml-2 px-5 py-2.5 text-[11px]">
+            <a href="https://wa.me/8801338338537" className="btn-brand ml-2 px-5 py-2.5 text-[11px]">
               WhatsApp
-            </button>
+            </a>
           </div>
 
           <button
@@ -150,12 +150,12 @@ export default function Navbar() {
             >
               <CartIcon />
             </button>
-            <button
-              type="button"
+            <a
+              href="https://wa.me/8801338338537"
               className="btn-brand ml-auto px-5 py-2.5 text-[11px] shadow-[0_8px_20px_rgba(200,169,106,0.24)] transition-all duration-300 hover:scale-105 hover:shadow-[0_14px_24px_rgba(200,169,106,0.3)]"
             >
               WhatsApp
-            </button>
+            </a>
           </div>
         </div>
       </div>

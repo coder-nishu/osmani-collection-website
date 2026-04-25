@@ -149,7 +149,7 @@ export default function ProductPage() {
 
             <div className="mt-10 flex flex-wrap gap-3">
               <a
-                href={`https://wa.me/8801000000000?text=I%20want%20to%20order%20${encodeURIComponent(product.name)}`}
+                href={`https://wa.me/8801338338537?text=I%20want%20to%20order%20${encodeURIComponent(product.name)}`}
                 className="btn-brand px-6 py-3"
               >
                 Order via WhatsApp

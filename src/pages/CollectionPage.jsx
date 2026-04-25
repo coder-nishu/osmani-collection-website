@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import Navbar from "../components/common/Navbar";
 import Footer from "../components/common/Footer";
+import WhatsAppFloating from "../components/common/WhatsAppFloating";
 import FilterBar from "../components/product/FilterBar";
 import ProductGrid from "../components/product/ProductGrid";
 import { getProductsByType } from "../services/productService";
@@ -70,6 +71,7 @@ export default function CollectionPage({ type }) {
       </main>
 
       <Footer />
+      <WhatsAppFloating />
     </div>
   );
 }

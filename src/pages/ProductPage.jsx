@@ -3,14 +3,20 @@ import { Link, useParams } from "react-router-dom";
 import Navbar from "../components/common/Navbar";
 import Footer from "../components/common/Footer";
 import ProductGrid from "../components/product/ProductGrid";
-import { getProductById, getProductsByType } from "../services/productService";
+import { getProductBySlug, getProductsByType } from "../services/productService";
 import { formatPrice } from "../utils/helpers";
 
+const WHATSAPP_NUMBER = "8801338338537";
+
 export default function ProductPage() {
-  const { id } = useParams();
-  const product = getProductById(id);
-  const [selectedSize, setSelectedSize] = useState(product?.pricing?.[0]?.size ?? "");
-  const [showDetails, setShowDetails] = useState(false);
+  const { slug } = useParams();
+  const product = getProductBySlug(slug);
+  const [selectedSizeBySlug, setSelectedSizeBySlug] = useState({});
+  const [detailsSlug, setDetailsSlug] = useState(null);
+
+  const selectedSize =
+    selectedSizeBySlug[product?.slug] ?? product?.pricing?.[0]?.size ?? "";
+  const showDetails = detailsSlug === product?.slug;
 
   const selectedPricing = useMemo(
     () => product?.pricing?.find((entry) => entry.size === selectedSize) ?? product?.pricing?.[0],
@@ -106,7 +112,7 @@ export default function ProductPage() {
 
             <button
               type="button"
-              onClick={() => setShowDetails((prev) => !prev)}
+              onClick={() => setDetailsSlug((prev) => (prev === product.slug ? null : product.slug))}
               className="mt-6 inline-flex items-center gap-2 text-[11px] uppercase tracking-[0.2em] text-(--color-accent) transition-colors duration-300 hover:text-(--color-primary)"
               aria-expanded={showDetails}
               aria-controls="product-more-details"
@@ -122,6 +128,63 @@ export default function ProductPage() {
               </svg>
             </button>
 
+            <div
+              id="product-more-details"
+              className={`grid transition-all duration-500 ease-out ${showDetails ? "mt-8 grid-rows-[1fr] opacity-100" : "mt-0 grid-rows-[0fr] opacity-0"}`}
+            >
+              <div className="overflow-hidden">
+                <div className="space-y-10 border-t border-(--color-primary)/12 pt-8">
+                  <div>
+                    <h3 className="text-[11px] uppercase tracking-[0.22em] text-(--color-primary)/62">Main Notes</h3>
+                    <div className="mt-4 flex flex-wrap gap-2.5">
+                      {product.notes.map((note) => (
+                        <span
+                          key={note}
+                          className="inline-flex rounded-full bg-(--color-primary)/6 px-3 py-1.5 text-[11px] uppercase tracking-[0.13em] text-(--color-primary)/78 transition-colors duration-300 hover:bg-(--color-accent)/14"
+                        >
+                          {note}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {(bestForSeasons.length > 0 || bestForTime.length > 0) && (
+                    <div className="space-y-3">
+                      <h3 className="text-[11px] uppercase tracking-[0.22em] text-(--color-primary)/62">Best For</h3>
+                      {bestForSeasons.length > 0 ? (
+                        <p className="text-sm tracking-wide text-(--color-primary)/80">
+                          {bestForSeasons.map((season) => season.charAt(0).toUpperCase() + season.slice(1)).join(" • ")}
+                        </p>
+                      ) : null}
+                      {bestForTime.length > 0 ? (
+                        <p className="text-sm tracking-wide text-(--color-primary)/80">{bestForTime.join(" • ")}</p>
+                      ) : null}
+                    </div>
+                  )}
+
+                  <div className="space-y-4">
+                    <h3 className="text-[11px] uppercase tracking-[0.22em] text-(--color-primary)/62">Performance</h3>
+                    <div className="flex flex-wrap gap-2.5">
+                      <span className="inline-flex rounded-full border border-(--color-primary)/16 px-3 py-1.5 text-xs tracking-wide text-(--color-primary)/82">
+                        {product.projection} Projection
+                      </span>
+                      <span className="inline-flex rounded-full border border-(--color-primary)/16 px-3 py-1.5 text-xs tracking-wide text-(--color-primary)/82">
+                        {product.longevity}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div>
+                    <h2 className="text-[11px] uppercase tracking-[0.22em] text-(--color-primary)/62">Additional Information</h2>
+                    <p className="mt-3 max-w-xl leading-relaxed text-(--color-primary)/74">
+                      For best performance, apply on pulse points and layer lightly. Store away from direct sunlight
+                      to preserve the fragrance profile.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <div className="mt-14">
               <p className="text-[11px] uppercase tracking-[0.22em] text-(--color-primary)/62">Select Size</p>
               <div className="mt-4 flex flex-wrap gap-2.5">
@@ -131,7 +194,12 @@ export default function ProductPage() {
                     <button
                       key={entry.size}
                       type="button"
-                      onClick={() => setSelectedSize(entry.size)}
+                      onClick={() =>
+                        setSelectedSizeBySlug((prev) => ({
+                          ...prev,
+                          [product.slug]: entry.size,
+                        }))
+                      }
                       className={`rounded-full border px-4 py-2.5 text-xs uppercase tracking-[0.16em] transition-all duration-300 ${
                         isSelected
                           ? "border-(--color-accent) bg-(--color-accent)/16 text-(--color-primary)"
@@ -149,67 +217,24 @@ export default function ProductPage() {
 
             <div className="mt-10 flex flex-wrap gap-3">
               <a
-                href={`https://wa.me/8801338338537?text=I%20want%20to%20order%20${encodeURIComponent(product.name)}`}
-                className="btn-brand px-6 py-3"
+                href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(`I want to buy now: ${product.name}`)}`}
+                className="inline-flex min-h-12 flex-1 items-center justify-center rounded-full border border-(--color-accent) bg-(--color-accent) px-7 py-3 text-sm uppercase tracking-[0.14em] text-(--color-primary) transition-all duration-300 hover:-translate-y-0.5 hover:brightness-95 sm:flex-none"
               >
-                Order via WhatsApp
+                Buy Now
               </a>
-              <button type="button" className="btn-brand">
-                Add to Cart
-              </button>
+              <a
+                href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(`Assalamu Alaikum, I want details about ${product.name}`)}`}
+                className="inline-flex min-h-12 flex-1 items-center justify-center rounded-full border border-(--color-primary)/24 px-6 py-3 text-sm uppercase tracking-[0.14em] text-(--color-primary) transition-all duration-300 hover:-translate-y-0.5 hover:border-(--color-accent) sm:flex-none"
+              >
+                <svg viewBox="0 0 32 32" className="mr-2 h-4 w-4" aria-hidden="true">
+                  <path
+                    fill="#25D366"
+                    d="M19.11 17.35c-.25-.13-1.47-.73-1.7-.82-.23-.08-.4-.13-.57.13-.17.25-.65.82-.8.98-.15.17-.3.19-.55.06-.25-.13-1.06-.39-2.02-1.24-.74-.66-1.24-1.48-1.39-1.73-.15-.25-.02-.38.11-.51.11-.11.25-.3.38-.44.13-.15.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.57-1.38-.78-1.89-.21-.5-.42-.43-.57-.43h-.49c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.43 1.03 2.6.13.17 1.76 2.68 4.27 3.76.6.26 1.07.41 1.43.52.6.19 1.15.16 1.58.1.48-.07 1.47-.6 1.68-1.17.21-.57.21-1.06.15-1.16-.06-.11-.23-.17-.48-.3Z"
+                  />
+                </svg>
+                Message on WhatsApp
+              </a>
             </div>
-
-            {showDetails ? (
-              <div id="product-more-details" className="mt-14 space-y-12 border-t border-(--color-primary)/12 pt-8">
-                <div>
-                  <h3 className="text-[11px] uppercase tracking-[0.22em] text-(--color-primary)/62">Main Notes</h3>
-                  <div className="mt-4 flex flex-wrap gap-2.5">
-                    {product.notes.map((note) => (
-                      <span
-                        key={note}
-                        className="inline-flex rounded-full bg-(--color-primary)/6 px-3 py-1.5 text-[11px] uppercase tracking-[0.13em] text-(--color-primary)/78 transition-colors duration-300 hover:bg-(--color-accent)/14"
-                      >
-                        {note}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                {(bestForSeasons.length > 0 || bestForTime.length > 0) && (
-                  <div className="space-y-3">
-                    <h3 className="text-[11px] uppercase tracking-[0.22em] text-(--color-primary)/62">Best For</h3>
-                    {bestForSeasons.length > 0 ? (
-                      <p className="text-sm tracking-wide text-(--color-primary)/80">
-                        {bestForSeasons.map((season) => season.charAt(0).toUpperCase() + season.slice(1)).join(" • ")}
-                      </p>
-                    ) : null}
-                    {bestForTime.length > 0 ? (
-                      <p className="text-sm tracking-wide text-(--color-primary)/80">{bestForTime.join(" • ")}</p>
-                    ) : null}
-                  </div>
-                )}
-
-                <div className="space-y-4">
-                  <h3 className="text-[11px] uppercase tracking-[0.22em] text-(--color-primary)/62">Performance</h3>
-                  <div className="flex flex-wrap gap-2.5">
-                    <span className="inline-flex rounded-full border border-(--color-primary)/16 px-3 py-1.5 text-xs tracking-wide text-(--color-primary)/82">
-                      {product.projection} Projection
-                    </span>
-                    <span className="inline-flex rounded-full border border-(--color-primary)/16 px-3 py-1.5 text-xs tracking-wide text-(--color-primary)/82">
-                      {product.longevity}
-                    </span>
-                  </div>
-                </div>
-
-                <div>
-                  <h2 className="text-[11px] uppercase tracking-[0.22em] text-(--color-primary)/62">Additional Information</h2>
-                  <p className="mt-3 max-w-xl leading-relaxed text-(--color-primary)/74">
-                    For best performance, apply on pulse points and layer lightly. Store away from direct sunlight
-                    to preserve the fragrance profile.
-                  </p>
-                </div>
-              </div>
-            ) : null}
           </div>
         </section>
 
@@ -226,7 +251,6 @@ export default function ProductPage() {
           <ProductGrid products={relatedProducts} />
         </section>
       </main>
-
       <Footer />
     </div>
   );

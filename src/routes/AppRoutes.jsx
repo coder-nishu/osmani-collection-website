@@ -9,7 +9,7 @@ export default function AppRoutes() {
       <Route path="/" element={<Home />} />
       <Route path="/attar" element={<CollectionPage type="attar" />} />
       <Route path="/perfume" element={<CollectionPage type="perfume" />} />
-      <Route path="/product/:id" element={<ProductPage />} />
+      <Route path="/product/:slug" element={<ProductPage />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );

@@ -5,6 +5,7 @@ import MarqueeSection from "../components/MarqueeSection";
 import CollectionSection from "../components/CollectionSection";
 import FeaturedProducts from "../components/FeaturedProducts";
 import CTASection from "../components/CTASection";
+import WhatsAppFloating from "../components/common/WhatsAppFloating";
 
 export default function Home() {
   return (
@@ -31,6 +32,7 @@ export default function Home() {
       />
 
       <CTASection />
+      <WhatsAppFloating />
       <Footer />
     </div>
   );

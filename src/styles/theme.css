@@ -103,3 +103,22 @@ body {
   margin-right: 2.8rem;
   white-space: nowrap;
 }
+
+@keyframes whatsappAttention {
+  0%,
+  100% {
+    transform: translateY(0);
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.22);
+  }
+  45% {
+    transform: translateY(-8px);
+    box-shadow: 0 22px 34px rgba(37, 211, 102, 0.38);
+  }
+  60% {
+    transform: translateY(-3px);
+  }
+}
+
+.whatsapp-float-attention {
+  animation: whatsappAttention 1.6s ease-in-out infinite;
+}

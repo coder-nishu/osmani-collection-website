@@ -4,16 +4,17 @@ import { formatPrice, getStartingPrice } from "../../utils/helpers";
 export default function ProductCard({ product }) {
   const navigate = useNavigate();
   const notePreview = (product.notes ?? []).slice(0, 3).join(" • ") || product.category;
+  const productPath = `/product/${product.slug ?? product.id}`;
 
   return (
     <article
       role="button"
       tabIndex={0}
-      onClick={() => navigate(`/product/${product.id}`)}
+      onClick={() => navigate(productPath)}
       onKeyDown={(event) => {
         if (event.key === "Enter" || event.key === " ") {
           event.preventDefault();
-          navigate(`/product/${product.id}`);
+          navigate(productPath);
         }
       }}
       className="group cursor-pointer overflow-hidden rounded-2xl border border-(--color-primary)/8 bg-(--color-bg) transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.01]"

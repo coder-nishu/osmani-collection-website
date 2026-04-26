@@ -1,4 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { Link } from "react-router-dom";
+import { getCart } from "../../utils/cartStorage";
 
 const demoLogoUrl =
   "https://images.unsplash.com/photo-1563170351-be82bc888aa4?auto=format&fit=crop&w=420&q=80";
@@ -38,6 +40,7 @@ function CartIcon() {
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [cartCount, setCartCount] = useState(() => getCart().length);
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 14);
@@ -46,6 +49,30 @@ export default function Navbar() {
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  useEffect(() => {
+    const handleCartUpdate = () => setCartCount(getCart().length);
+
+    window.addEventListener("cart:updated", handleCartUpdate);
+    window.addEventListener("storage", handleCartUpdate);
+
+    return () => {
+      window.removeEventListener("cart:updated", handleCartUpdate);
+      window.removeEventListener("storage", handleCartUpdate);
+    };
+  }, []);
+
+  const cartBadge = useMemo(() => {
+    if (!cartCount) {
+      return null;
+    }
+
+    return (
+      <span className="absolute -right-1 -top-1 flex h-4 min-w-[16px] items-center justify-center rounded-full bg-[color:var(--color-accent)] px-1 text-[10px] font-semibold text-[color:var(--color-primary)]">
+        {cartCount}
+      </span>
+    );
+  }, [cartCount]);
 
   return (
     <header
@@ -57,7 +84,7 @@ export default function Navbar() {
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
         <nav className="flex h-22 items-center justify-between lg:h-24">
-          <a href="/" className="flex items-center gap-3">
+            <Link to="/" className="flex items-center gap-3">
             <img
               src={demoLogoUrl}
               alt="Osmani Collection"
@@ -66,18 +93,18 @@ export default function Navbar() {
             <span className="font-heading text-2xl tracking-wide text-[color:var(--color-primary)] lg:text-3xl">
               Osmani
             </span>
-          </a>
+            </Link>
 
           <ul className="hidden items-center gap-10 md:flex">
             {menuItems.map((item) => (
               <li key={item.label}>
-                <a
-                  href={item.href}
+                <Link
+                  to={item.href}
                   className="group relative text-sm uppercase tracking-[0.16em] text-[color:var(--color-primary)] transition-colors duration-300 hover:text-[color:var(--color-accent)]"
                 >
                   {item.label}
                   <span className="absolute -bottom-1 left-0 h-px w-0 bg-[color:var(--color-accent)] transition-all duration-300 group-hover:w-full" />
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
@@ -90,13 +117,14 @@ export default function Navbar() {
             >
               <SearchIcon />
             </button>
-            <button
-              className="btn-brand ml-2 px-5 py-2.5 text-[11px] shadow-[0_8px_20px_rgba(200,169,106,0.24)] transition-all duration-300 hover:scale-105 hover:shadow-[0_14px_24px_rgba(200,169,106,0.3)]"
+            <Link
+              to="/cart"
               aria-label="Cart"
-              className="rounded-full p-2.5 text-[color:var(--color-primary)] transition-colors duration-300 hover:text-[color:var(--color-accent)]"
+              className="relative rounded-full p-2.5 text-[color:var(--color-primary)] transition-colors duration-300 hover:text-[color:var(--color-accent)]"
             >
               <CartIcon />
-            </button>
+              {cartBadge}
+            </Link>
             <a href="https://wa.me/8801338338537" className="btn-brand ml-2 px-5 py-2.5 text-[11px]">
               WhatsApp
             </a>
@@ -124,13 +152,13 @@ export default function Navbar() {
           <ul className="space-y-3 border-t border-[color:var(--color-primary)]/10 pt-4">
             {menuItems.map((item) => (
               <li key={item.label}>
-                <a
-                  href={item.href}
+                <Link
+                  to={item.href}
                   className="group relative inline-block py-1 text-sm uppercase tracking-[0.16em] text-[color:var(--color-primary)] transition-colors duration-300 hover:text-[color:var(--color-accent)]"
                 >
                   {item.label}
                   <span className="absolute -bottom-0.5 left-0 h-px w-0 bg-[color:var(--color-accent)] transition-all duration-300 group-hover:w-full" />
-                </a>
+                </Link>
               </li>
             ))}
           </ul>
@@ -143,13 +171,14 @@ export default function Navbar() {
             >
               <SearchIcon />
             </button>
-            <button
-              type="button"
+            <Link
+              to="/cart"
               aria-label="Cart"
-              className="rounded-full border border-[color:var(--color-primary)]/15 p-2.5 text-[color:var(--color-primary)] transition-colors duration-300 hover:text-[color:var(--color-accent)]"
+              className="relative rounded-full border border-[color:var(--color-primary)]/15 p-2.5 text-[color:var(--color-primary)] transition-colors duration-300 hover:text-[color:var(--color-accent)]"
             >
               <CartIcon />
-            </button>
+              {cartBadge}
+            </Link>
             <a
               href="https://wa.me/8801338338537"
               className="btn-brand ml-auto px-5 py-2.5 text-[11px] shadow-[0_8px_20px_rgba(200,169,106,0.24)] transition-all duration-300 hover:scale-105 hover:shadow-[0_14px_24px_rgba(200,169,106,0.3)]"

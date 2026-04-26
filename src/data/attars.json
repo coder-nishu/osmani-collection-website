@@ -100,22 +100,6 @@
       { "size": "6ml", "price": 750 },
       { "size": "12ml", "price": 1390 }
     ]
-  },
-  {
-    "id": "attar_007",
-    "name": "dtfsgdfg Inspired",
-    "type": "attar",
-    "category": "premium",
-    "description": "Elegant musky floral scent inspired by Narciso style.",
-    "notes": ["Musk", "Floral", "Powdery"],
-    "projection": "Moderate",
-    "longevity": "8 hours",
-    "seasons": ["spring", "day", "night"],
-    "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg",
-    "pricing": [
-      { "size": "3ml", "price": 390 },
-      { "size": "6ml", "price": 750 },
-      { "size": "12ml", "price": 1390 }
-    ]
   }
+  
 ]

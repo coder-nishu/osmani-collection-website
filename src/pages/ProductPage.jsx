@@ -1,10 +1,11 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Navbar from "../components/common/Navbar";
 import Footer from "../components/common/Footer";
 import ProductGrid from "../components/product/ProductGrid";
 import { getProductBySlug, getProductsByType } from "../services/productService";
 import { formatPrice } from "../utils/helpers";
+import { addToCart } from "../utils/cartStorage";
 
 const WHATSAPP_NUMBER = "8801338338537";
 
@@ -13,6 +14,7 @@ export default function ProductPage() {
   const product = getProductBySlug(slug);
   const [selectedSizeBySlug, setSelectedSizeBySlug] = useState({});
   const [detailsSlug, setDetailsSlug] = useState(null);
+  const [toastMessage, setToastMessage] = useState("");
 
   const selectedSize =
     selectedSizeBySlug[product?.slug] ?? product?.pricing?.[0]?.size ?? "";
@@ -22,6 +24,31 @@ export default function ProductPage() {
     () => product?.pricing?.find((entry) => entry.size === selectedSize) ?? product?.pricing?.[0],
     [product, selectedSize],
   );
+
+  useEffect(() => {
+    if (!toastMessage) {
+      return undefined;
+    }
+
+    const timeout = window.setTimeout(() => setToastMessage(""), 2200);
+    return () => window.clearTimeout(timeout);
+  }, [toastMessage]);
+
+  const handleAddToCart = () => {
+    if (!product || !selectedPricing) {
+      return;
+    }
+
+    addToCart({
+      id: product.id,
+      name: product.name,
+      size: selectedPricing.size,
+      price: selectedPricing.price,
+      image: product.image,
+    });
+
+    setToastMessage("Added to cart");
+  };
 
   const relatedProducts = useMemo(() => {
     if (!product) {
@@ -222,6 +249,13 @@ export default function ProductPage() {
               >
                 Buy Now
               </a>
+              <button
+                type="button"
+                onClick={handleAddToCart}
+                className="inline-flex min-h-12 flex-1 items-center justify-center rounded-full border border-(--color-primary)/24 px-6 py-3 text-sm uppercase tracking-[0.14em] text-(--color-primary) transition-all duration-300 hover:-translate-y-0.5 hover:border-(--color-accent) sm:flex-none"
+              >
+                Add to Cart
+              </button>
               <a
                 href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(`Assalamu Alaikum, I want details about ${product.name}`)}`}
                 className="inline-flex min-h-12 flex-1 items-center justify-center rounded-full border border-(--color-primary)/24 px-6 py-3 text-sm uppercase tracking-[0.14em] text-(--color-primary) transition-all duration-300 hover:-translate-y-0.5 hover:border-(--color-accent) sm:flex-none"
@@ -252,6 +286,14 @@ export default function ProductPage() {
         </section>
       </main>
       <Footer />
+
+      {toastMessage ? (
+        <div className="pointer-events-none fixed bottom-6 left-1/2 z-50 w-full max-w-xs -translate-x-1/2 px-4">
+          <div className="rounded-2xl bg-[color:var(--color-primary)] px-5 py-3 text-center text-xs uppercase tracking-[0.18em] text-[color:var(--color-accent)] shadow-[0_20px_40px_rgba(23,33,25,0.3)]">
+            {toastMessage}
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 }

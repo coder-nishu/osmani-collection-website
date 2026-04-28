@@ -14,7 +14,7 @@ const collectionCards = [
       "https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=1400&q=80",
   },
   {
-    title: "Premium Collection",
+    title: "Best Sellers",
     href: "/attar",
     image:
       "https://images.unsplash.com/photo-1610461888750-10bfc601b874?auto=format&fit=crop&w=1400&q=80",
@@ -29,20 +29,20 @@ export default function CollectionSection() {
         <h2 className="font-heading mt-3 text-4xl text-(--color-primary) sm:text-5xl">Explore Signature Lines</h2>
       </div>
 
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {collectionCards.map((card) => (
           <Link key={card.title} to={card.href} className="group relative overflow-hidden rounded-3xl">
             <img
               src={card.image}
               alt={card.title}
-              className="h-88 w-full object-cover transition-transform duration-700 group-hover:scale-110"
+              className="h-64 w-full object-cover transition-transform duration-700 group-hover:scale-105 sm:h-72"
             />
 
             <div className="absolute inset-0 bg-linear-to-t from-[rgba(23,33,25,0.68)] via-[rgba(23,33,25,0.26)] to-[rgba(23,33,25,0.1)]" />
 
-            <div className="absolute bottom-0 left-0 right-0 p-7 sm:p-8">
+            <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6">
               <p className="text-[11px] uppercase tracking-[0.25em] text-(--color-accent)">Shop</p>
-              <h3 className="font-heading mt-3 text-4xl text-(--color-bg) sm:text-5xl">{card.title}</h3>
+              <h3 className="font-heading mt-2 text-3xl text-(--color-bg) sm:text-4xl">{card.title}</h3>
             </div>
           </Link>
         ))}

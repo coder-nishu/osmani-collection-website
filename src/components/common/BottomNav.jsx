@@ -107,9 +107,30 @@ export default function BottomNav() {
   const [cartCount, setCartCount] = useState(() => getCart().length);
   const [isVisible, setIsVisible] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isHidden, setIsHidden] = useState(false);
 
   useEffect(() => {
     setIsVisible(true);
+  }, []);
+
+  useEffect(() => {
+    let lastScrollY = window.scrollY;
+
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      const scrollingDown = currentScrollY > lastScrollY;
+
+      if (scrollingDown && currentScrollY > 80) {
+        setIsHidden(true);
+      } else {
+        setIsHidden(false);
+      }
+
+      lastScrollY = currentScrollY;
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
@@ -141,9 +162,10 @@ export default function BottomNav() {
       <div
         className={`fixed inset-x-0 bottom-5 z-50 flex justify-center px-4 transition-all duration-500 md:hidden ${
           isVisible ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
+        } ${!isMenuOpen && isHidden ? "translate-y-16 opacity-0" : ""}
         }`}
       >
-        <nav className="h-[60px] w-full max-w-[420px] rounded-full border border-white/40 bg-white/80 px-4 shadow-[0_18px_40px_rgba(23,33,25,0.22)] backdrop-blur">
+        <nav className="h-[60px] w-full max-w-[420px] overflow-hidden rounded-full border border-white/40 bg-white/80 px-4 shadow-[0_18px_40px_rgba(23,33,25,0.22)] backdrop-blur">
           <ul className="grid h-full grid-cols-5 items-center">
             {navItems.map((item) => {
               const isActive =
@@ -152,14 +174,18 @@ export default function BottomNav() {
                   (item.to !== "/" && location.pathname.startsWith(item.to)));
               const Icon = item.icon;
               const baseClasses =
-                "flex h-11 w-11 items-center justify-center rounded-full transition-all duration-300";
+                "flex h-9 w-9 items-center justify-center rounded-full transition-all duration-300";
               const activeClasses = isActive
-                ? "text-[color:var(--color-accent)] scale-110"
+                ? "text-[color:var(--color-primary)] scale-110"
                 : "text-[color:var(--color-primary)]/60";
-              const centerSize = item.isCenter ? "h-[52px] w-[52px]" : "";
+              const centerSize = item.isCenter ? "h-[46px] w-[46px]" : "";
               const centerActive =
                 item.isCenter && isActive
-                  ? "bg-[color:var(--color-primary)] text-[color:var(--color-accent)] shadow-[0_12px_20px_rgba(23,33,25,0.18)]"
+                  ? "bg-[color:var(--color-primary)]/25 text-[color:var(--color-primary)] shadow-[0_10px_18px_rgba(23,33,25,0.16)]"
+                  : "";
+              const centerInactive =
+                item.isCenter && !isActive
+                  ? "bg-[color:var(--color-accent)]/30 text-[color:var(--color-primary)]"
                   : "";
 
               if (item.isMenu) {
@@ -168,11 +194,11 @@ export default function BottomNav() {
                     <button
                       type="button"
                       onClick={() => setIsMenuOpen(true)}
-                      className="flex flex-col items-center gap-1 text-[9px] uppercase tracking-[0.2em]"
+                      className="flex flex-col items-center gap-0.5 text-[8px] uppercase tracking-[0.2em] leading-none"
                       aria-label="Open menu"
                     >
                       <span className={`${baseClasses} ${activeClasses}`}>
-                        <Icon className="h-5 w-5" />
+                        <Icon className="h-[18px] w-[18px]" />
                       </span>
                       <span className="text-[color:var(--color-primary)]/55">Menu</span>
                     </button>
@@ -184,16 +210,16 @@ export default function BottomNav() {
                 <li key={item.label} className="flex justify-center">
                   <Link
                     to={item.to}
-                    className="flex flex-col items-center gap-1 text-[9px] uppercase tracking-[0.2em]"
+                    className="flex flex-col items-center gap-0.5 text-[8px] uppercase tracking-[0.2em] leading-none"
                     aria-label={item.label}
                   >
-                    <span className={`${baseClasses} ${activeClasses} ${centerSize} ${centerActive}`}>
+                    <span className={`${baseClasses} ${activeClasses} ${centerSize} ${centerActive} ${centerInactive}`}>
                       <span className="relative">
-                        <Icon className={item.isCenter ? "h-6 w-6" : "h-5 w-5"} />
+                        <Icon className={item.isCenter ? "h-5 w-5" : "h-[18px] w-[18px]"} />
                         {item.isCenter ? cartBadge : null}
                       </span>
                     </span>
-                    <span className={isActive ? "text-[color:var(--color-accent)]" : "text-[color:var(--color-primary)]/55"}>
+                    <span className={isActive ? "text-[color:var(--color-primary)]" : "text-[color:var(--color-primary)]/55"}>
                       {item.label}
                     </span>
                   </Link>

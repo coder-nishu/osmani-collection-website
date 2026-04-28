@@ -3,16 +3,19 @@ import { Link } from "react-router-dom";
 import Navbar from "../components/common/Navbar";
 import Footer from "../components/common/Footer";
 import CartItem from "../components/cart/CartItem";
+import OrderModal from "../components/OrderModal";
 import { getCart } from "../utils/cartStorage";
 import { formatPrice } from "../utils/helpers";
 
 const API_URL =
   "https://script.google.com/macros/s/AKfycbxIbXNaJ5hz5bmGLgZ6VD39pbgKpPU5Gfddvj2Z5IPIH84OQfme9S_7ZtK26bNP1L4QwA/exec";
-const RAW_WHATSAPP_NUMBER = "01338338537";
+const RAW_WHATSAPP_NUMBER = "01628311569";
 const WHATSAPP_NUMBER = RAW_WHATSAPP_NUMBER.startsWith("0")
   ? `880${RAW_WHATSAPP_NUMBER.slice(1)}`
   : RAW_WHATSAPP_NUMBER;
-const REDIRECT_DELAY_MS = 2000;
+const PROCESSING_STAGE_MS = 1500;
+const SUCCESS_STAGE_MS = 1000;
+const REDIRECT_DELAY_MS = PROCESSING_STAGE_MS + SUCCESS_STAGE_MS + 500;
 
 const initialFormState = {
   name: "",
@@ -27,10 +30,9 @@ export default function CheckoutPage() {
   const [isCodChecked, setIsCodChecked] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
-  const [submitSuccess, setSubmitSuccess] = useState("");
-  const [orderId, setOrderId] = useState("");
-
-  const isSuccess = Boolean(submitSuccess);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalStage, setModalStage] = useState("processing");
+  const [orderSnapshot, setOrderSnapshot] = useState({ items: [], total: 0 });
 
   useEffect(() => {
     const handleCartUpdate = () => setCartItems(getCart());
@@ -88,8 +90,8 @@ export default function CheckoutPage() {
     return Object.keys(nextErrors).length === 0;
   };
 
-  const buildWhatsAppMessage = () => {
-    const itemsText = cartItems
+  const buildWhatsAppMessage = (items, totalAmount) => {
+    const itemsText = items
       .map(
         (item) =>
           `* ${item.name} (${item.size}) x${Number(item.quantity || 1)}`,
@@ -105,31 +107,43 @@ export default function CheckoutPage() {
       "",
       "Items:",
       itemsText,
+      "",
+      `Total: ${formatPrice(totalAmount)}`,
     ].join("\n");
   };
 
-  const handleSuccess = (data) => {
-    setSubmitSuccess("Order placed successfully!");
-    setOrderId(data?.orderId || "");
+  useEffect(() => {
+    if (!isModalOpen) {
+      return undefined;
+    }
 
-    window.localStorage.removeItem("cart_items");
-    window.dispatchEvent(new CustomEvent("cart:updated"));
-    setCartItems([]);
-    setFormValues(initialFormState);
-    setFormErrors({});
-    setIsCodChecked(false);
+    setModalStage("processing");
 
-    const message = buildWhatsAppMessage();
-    const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+    const successTimer = window.setTimeout(() => {
+      setModalStage("success");
+    }, PROCESSING_STAGE_MS);
 
-    window.setTimeout(() => {
+    const redirectTimer = window.setTimeout(() => {
+      const message = buildWhatsAppMessage(orderSnapshot.items, orderSnapshot.total);
+      const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+
+      window.localStorage.removeItem("cart_items");
+      window.dispatchEvent(new CustomEvent("cart:updated"));
+      setCartItems([]);
+      setFormValues(initialFormState);
+      setFormErrors({});
+      setIsCodChecked(false);
+      setIsSubmitting(false);
+      setIsModalOpen(false);
+
       window.location.href = whatsappUrl;
     }, REDIRECT_DELAY_MS);
-  };
 
-  const handleError = () => {
-    setSubmitError("Something went wrong. Please try again.");
-  };
+    return () => {
+      window.clearTimeout(successTimer);
+      window.clearTimeout(redirectTimer);
+    };
+  }, [isModalOpen, orderSnapshot, formValues]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -145,8 +159,8 @@ export default function CheckoutPage() {
 
     setIsSubmitting(true);
     setSubmitError("");
-    setSubmitSuccess("");
-    setOrderId("");
+    setOrderSnapshot({ items: cartItems, total });
+    setIsModalOpen(true);
 
     try {
       const payload = {
@@ -161,18 +175,15 @@ export default function CheckoutPage() {
         })),
       };
 
-      await fetch(API_URL, {
+      fetch(API_URL, {
         method: "POST",
         mode: "no-cors", // ✅ correct
         body: JSON.stringify(payload),
-      });
-
-      // ✅ assume success
-      handleSuccess(null);
+      }).catch(() => {});
     } catch (error) {
-      handleError();
+      // no-op: do not block the user flow
     } finally {
-      setIsSubmitting(false);
+      // modal flow handles state and redirect
     }
   };
 
@@ -225,24 +236,12 @@ export default function CheckoutPage() {
             </div>
 
             <form
-              className={`rounded-3xl border border-[color:var(--color-primary)]/10 bg-[color:var(--color-surface)]/70 p-6 ${
-                isSuccess ? "opacity-70" : ""
-              }`}
+              className="rounded-3xl border border-[color:var(--color-primary)]/10 bg-[color:var(--color-surface)]/70 p-6"
               onSubmit={handleSubmit}
             >
               <h2 className="text-sm uppercase tracking-[0.26em] text-[color:var(--color-primary)]/70">
                 Delivery Info
               </h2>
-
-              {submitSuccess ? (
-                <div className="mt-4 rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-700">
-                  <p>{submitSuccess}</p>
-                  {orderId ? <p className="mt-1">Order ID: {orderId}</p> : null}
-                  <p className="mt-2 text-xs text-emerald-700/80">
-                    Redirecting to WhatsApp...
-                  </p>
-                </div>
-              ) : null}
 
               {submitError ? (
                 <div className="mt-4 rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-600">
@@ -258,7 +257,7 @@ export default function CheckoutPage() {
                     name="name"
                     value={formValues.name}
                     onChange={handleChange}
-                    disabled={isSubmitting || isSuccess}
+                    disabled={isSubmitting || isModalOpen}
                     className="mt-2 w-full rounded-2xl border border-[color:var(--color-primary)]/15 bg-white/70 px-4 py-3 text-sm text-[color:var(--color-primary)] focus:border-[color:var(--color-accent)] focus:outline-none"
                     placeholder="Your full name"
                     required
@@ -277,7 +276,7 @@ export default function CheckoutPage() {
                     name="phone"
                     value={formValues.phone}
                     onChange={handleChange}
-                    disabled={isSubmitting || isSuccess}
+                    disabled={isSubmitting || isModalOpen}
                     className="mt-2 w-full rounded-2xl border border-[color:var(--color-primary)]/15 bg-white/70 px-4 py-3 text-sm text-[color:var(--color-primary)] focus:border-[color:var(--color-accent)] focus:outline-none"
                     placeholder="Phone number"
                     required
@@ -296,7 +295,7 @@ export default function CheckoutPage() {
                     value={formValues.address}
                     onChange={handleChange}
                     rows={4}
-                    disabled={isSubmitting || isSuccess}
+                    disabled={isSubmitting || isModalOpen}
                     className="mt-2 w-full resize-none rounded-2xl border border-[color:var(--color-primary)]/15 bg-white/70 px-4 py-3 text-sm text-[color:var(--color-primary)] focus:border-[color:var(--color-accent)] focus:outline-none"
                     placeholder="Full delivery address"
                     required
@@ -313,11 +312,16 @@ export default function CheckoutPage() {
                     type="checkbox"
                     checked={isCodChecked}
                     onChange={handleCodChange}
-                    disabled={isSubmitting || isSuccess}
+                    disabled={isSubmitting || isModalOpen}
                     className="mt-0.5 h-4 w-4"
                     required
                   />
-                  <span>Cash on Delivery</span>
+                  <span>
+                    Cash on Delivery
+                    <span className="mt-1 block text-[10px] normal-case tracking-normal text-[color:var(--color-primary)]/60">
+                      Dhaka delivery 70tk, outside Dhaka delivery 120tk.
+                    </span>
+                  </span>
                 </label>
                 {formErrors.cod ? (
                   <span className="text-xs text-red-600">{formErrors.cod}</span>
@@ -327,11 +331,11 @@ export default function CheckoutPage() {
               <button
                 type="submit"
                 className={`btn-brand mt-6 w-full min-h-12 text-[11px] ${
-                  isSubmitting || isSuccess
+                  isSubmitting || isModalOpen
                     ? "cursor-not-allowed opacity-70"
                     : ""
                 }`}
-                disabled={isSubmitting || isSuccess}
+                disabled={isSubmitting || isModalOpen}
               >
                 {isSubmitting ? "Placing Order..." : "Place Order"}
               </button>
@@ -345,6 +349,12 @@ export default function CheckoutPage() {
       </main>
 
       <Footer />
+      <OrderModal
+        isOpen={isModalOpen}
+        stage={modalStage}
+        items={orderSnapshot.items}
+        total={orderSnapshot.total}
+      />
     </div>
   );
 }

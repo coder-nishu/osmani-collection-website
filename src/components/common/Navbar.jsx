@@ -1,6 +1,5 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { getCart } from "../../utils/cartStorage";
 
 const demoLogoUrl =
   "https://images.unsplash.com/photo-1563170351-be82bc888aa4?auto=format&fit=crop&w=420&q=80";
@@ -12,35 +11,9 @@ const menuItems = [
   { label: "Collections", href: "/collections" },
 ];
 
-function SearchIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5" aria-hidden="true">
-      <circle cx="11" cy="11" r="6.5" stroke="currentColor" strokeWidth="1.7" />
-      <path d="M16 16L21 21" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
-    </svg>
-  );
-}
-
-function CartIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5" aria-hidden="true">
-      <path
-        d="M3 4H5.2L7.1 13.2C7.3 14.1 8.1 14.8 9 14.8H17.2C18.1 14.8 18.9 14.2 19.1 13.3L20.3 8.1C20.5 7.2 19.8 6.4 18.9 6.4H6.2"
-        stroke="currentColor"
-        strokeWidth="1.7"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <circle cx="9.5" cy="19" r="1.3" fill="currentColor" />
-      <circle cx="17" cy="19" r="1.3" fill="currentColor" />
-    </svg>
-  );
-}
-
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [cartCount, setCartCount] = useState(() => getCart().length);
 
   useEffect(() => {
     const onScroll = () => setIsScrolled(window.scrollY > 14);
@@ -49,30 +22,6 @@ export default function Navbar() {
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-
-  useEffect(() => {
-    const handleCartUpdate = () => setCartCount(getCart().length);
-
-    window.addEventListener("cart:updated", handleCartUpdate);
-    window.addEventListener("storage", handleCartUpdate);
-
-    return () => {
-      window.removeEventListener("cart:updated", handleCartUpdate);
-      window.removeEventListener("storage", handleCartUpdate);
-    };
-  }, []);
-
-  const cartBadge = useMemo(() => {
-    if (!cartCount) {
-      return null;
-    }
-
-    return (
-      <span className="absolute -right-1 -top-1 flex h-4 min-w-[16px] items-center justify-center rounded-full bg-[color:var(--color-accent)] px-1 text-[10px] font-semibold text-[color:var(--color-primary)]">
-        {cartCount}
-      </span>
-    );
-  }, [cartCount]);
 
   return (
     <header
@@ -84,7 +33,7 @@ export default function Navbar() {
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
         <nav className="flex h-22 items-center justify-between lg:h-24">
-            <Link to="/" className="flex items-center gap-3">
+          <Link to="/" className="flex items-center gap-3">
             <img
               src={demoLogoUrl}
               alt="Osmani Collection"
@@ -93,7 +42,7 @@ export default function Navbar() {
             <span className="font-heading text-2xl tracking-wide text-[color:var(--color-primary)] lg:text-3xl">
               Osmani
             </span>
-            </Link>
+          </Link>
 
           <ul className="hidden items-center gap-10 md:flex">
             {menuItems.map((item) => (
@@ -108,27 +57,6 @@ export default function Navbar() {
               </li>
             ))}
           </ul>
-
-          <div className="hidden items-center gap-2.5 sm:flex">
-            <button
-              type="button"
-              aria-label="Search"
-              className="rounded-full p-2.5 text-[color:var(--color-primary)] transition-colors duration-300 hover:text-[color:var(--color-accent)]"
-            >
-              <SearchIcon />
-            </button>
-            <Link
-              to="/cart"
-              aria-label="Cart"
-              className="relative rounded-full p-2.5 text-[color:var(--color-primary)] transition-colors duration-300 hover:text-[color:var(--color-accent)]"
-            >
-              <CartIcon />
-              {cartBadge}
-            </Link>
-            <a href="https://wa.me/8801338338537" className="btn-brand ml-2 px-5 py-2.5 text-[11px]">
-              WhatsApp
-            </a>
-          </div>
 
           <button
             type="button"
@@ -163,29 +91,6 @@ export default function Navbar() {
             ))}
           </ul>
 
-          <div className="mt-5 flex items-center gap-2">
-            <button
-              type="button"
-              aria-label="Search"
-              className="rounded-full border border-[color:var(--color-primary)]/15 p-2.5 text-[color:var(--color-primary)] transition-colors duration-300 hover:text-[color:var(--color-accent)]"
-            >
-              <SearchIcon />
-            </button>
-            <Link
-              to="/cart"
-              aria-label="Cart"
-              className="relative rounded-full border border-[color:var(--color-primary)]/15 p-2.5 text-[color:var(--color-primary)] transition-colors duration-300 hover:text-[color:var(--color-accent)]"
-            >
-              <CartIcon />
-              {cartBadge}
-            </Link>
-            <a
-              href="https://wa.me/8801338338537"
-              className="btn-brand ml-auto px-5 py-2.5 text-[11px] shadow-[0_8px_20px_rgba(200,169,106,0.24)] transition-all duration-300 hover:scale-105 hover:shadow-[0_14px_24px_rgba(200,169,106,0.3)]"
-            >
-              WhatsApp
-            </a>
-          </div>
         </div>
       </div>
     </header>

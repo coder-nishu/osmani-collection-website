@@ -29,11 +29,27 @@ function matchesFilter(product, filter) {
 export default function CollectionPage({ type }) {
   const [activeFilter, setActiveFilter] = useState("all");
   const [sortBy, setSortBy] = useState("default");
+  const [searchTerm, setSearchTerm] = useState("");
 
   const collectionTitle = type === "attar" ? "Attar Collection" : "Perfume Collection";
 
   const products = useMemo(() => {
-    const filtered = getProductsByType(type).filter((product) => matchesFilter(product, activeFilter));
+    const normalizedSearch = searchTerm.trim().toLowerCase();
+    const matchesSearch = (product) => {
+      if (!normalizedSearch) {
+        return true;
+      }
+
+      const nameMatch = product.name?.toLowerCase().includes(normalizedSearch);
+      const categoryMatch = product.category?.toLowerCase().includes(normalizedSearch);
+      const noteMatch = (product.notes ?? []).some((note) => note.toLowerCase().includes(normalizedSearch));
+
+      return nameMatch || categoryMatch || noteMatch;
+    };
+
+    const filtered = getProductsByType(type).filter(
+      (product) => matchesFilter(product, activeFilter) && matchesSearch(product),
+    );
 
     if (sortBy === "price-asc") {
       return [...filtered].sort((a, b) => getStartingPrice(a) - getStartingPrice(b));
@@ -60,6 +76,18 @@ export default function CollectionPage({ type }) {
         </header>
 
         <section className="mt-10">
+          <div className="sticky top-16 z-30 -mx-4 mb-6 bg-[color:var(--color-bg)]/95 px-4 pb-4 pt-2 backdrop-blur sm:-mx-6 sm:px-6 lg:-mx-10 lg:px-10">
+            <div className="rounded-2xl border border-[color:var(--color-primary)]/10 bg-white/70 px-4 py-3">
+              <input
+                type="search"
+                value={searchTerm}
+                onChange={(event) => setSearchTerm(event.target.value)}
+                placeholder="Search fragrances"
+                className="w-full bg-transparent text-sm text-[color:var(--color-primary)] outline-none"
+                aria-label="Search fragrances"
+              />
+            </div>
+          </div>
           <FilterBar
             activeFilter={activeFilter}
             onFilterChange={setActiveFilter}

@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Navbar from "../components/common/Navbar";
 import Footer from "../components/common/Footer";
 import ProductGrid from "../components/product/ProductGrid";
@@ -10,6 +10,7 @@ import { addToCart } from "../utils/cartStorage";
 const WHATSAPP_NUMBER = "8801338338537";
 
 export default function ProductPage() {
+  const navigate = useNavigate();
   const { slug } = useParams();
   const product = getProductBySlug(slug);
   const [selectedSizeBySlug, setSelectedSizeBySlug] = useState({});
@@ -48,6 +49,23 @@ export default function ProductPage() {
     });
 
     setToastMessage("Added to cart");
+  };
+
+  const handleBuyNow = () => {
+    if (!product || !selectedPricing) {
+      return;
+    }
+
+    addToCart({
+      id: product.id,
+      name: product.name,
+      size: selectedPricing.size,
+      price: selectedPricing.price,
+      image: product.image,
+      quantity: 1,
+    });
+
+    navigate("/checkout");
   };
 
   const relatedProducts = useMemo(() => {
@@ -243,12 +261,13 @@ export default function ProductPage() {
             </div>
 
             <div className="mt-10 flex flex-wrap gap-3">
-              <a
-                href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(`I want to buy now: ${product.name}`)}`}
+              <button
+                type="button"
+                onClick={handleBuyNow}
                 className="inline-flex min-h-12 flex-1 items-center justify-center rounded-full border border-(--color-accent) bg-(--color-accent) px-7 py-3 text-sm uppercase tracking-[0.14em] text-(--color-primary) transition-all duration-300 hover:-translate-y-0.5 hover:brightness-95 sm:flex-none"
               >
                 Buy Now
-              </a>
+              </button>
               <button
                 type="button"
                 onClick={handleAddToCart}

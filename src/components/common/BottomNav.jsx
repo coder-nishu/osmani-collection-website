@@ -160,7 +160,7 @@ export default function BottomNav() {
   return (
     <>
       <div
-        className={`fixed inset-x-0 bottom-5 z-50 flex justify-center px-4 transition-all duration-500 md:hidden ${
+        className={`fixed inset-x-0 bottom-4 z-40 flex justify-center px-4 transition-all duration-500 md:hidden ${
           isVisible ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
         } ${!isMenuOpen && isHidden ? "translate-y-16 opacity-0" : ""}
         }`}

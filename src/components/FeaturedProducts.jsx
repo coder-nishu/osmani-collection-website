@@ -8,8 +8,9 @@ export default function FeaturedProducts({
   type,
   buttonLabel,
   buttonHref,
+  products,
 }) {
-  const featuredProducts = getProductsByType(type).slice(0, 6);
+  const featuredProducts = products ?? getProductsByType(type);
 
   return (
     <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-10 lg:py-16">

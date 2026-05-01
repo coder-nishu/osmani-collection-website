@@ -6,8 +6,12 @@ import CollectionSection from "../components/CollectionSection";
 import FeaturedProducts from "../components/FeaturedProducts";
 import CTASection from "../components/CTASection";
 import WhatsAppFloating from "../components/common/WhatsAppFloating";
+import { getProductsByType } from "../services/productService";
 
 export default function Home() {
+  const featuredAttars = getProductsByType("attar").slice(0, 4);
+  const featuredPerfumes = getProductsByType("perfume").slice(0, 4);
+
   return (
     <div className="bg-(--color-bg)">
       <Navbar />
@@ -19,6 +23,7 @@ export default function Home() {
         title="Featured Attars"
         subtitle="Small-batch Arabian attars with rich depth and refined longevity."
         type="attar"
+        products={featuredAttars}
         buttonLabel="View All Attars ->"
         buttonHref="/attar"
       />
@@ -27,6 +32,7 @@ export default function Home() {
         title="Featured Perfumes"
         subtitle="Modern premium blends crafted for elegant projection and presence."
         type="perfume"
+        products={featuredPerfumes}
         buttonLabel="View All Perfumes ->"
         buttonHref="/perfume"
       />

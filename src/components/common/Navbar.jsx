@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { getCart } from "../../utils/cartStorage";
 
-const demoLogoUrl =
-  "https://images.unsplash.com/photo-1563170351-be82bc888aa4?auto=format&fit=crop&w=420&q=80";
+const demoLogoUrl = "/osmani_favicon.jpg";
 
 const menuItems = [
   { label: "Home", href: "/" },
@@ -47,11 +46,15 @@ export default function Navbar() {
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <nav className="flex h-16 items-center justify-center">
-            <Link
-              to="/"
-              className="font-heading text-xl tracking-[0.18em] text-[color:var(--color-primary)]"
-            >
-              Osmani Collection
+            <Link to="/" className="flex items-center gap-2">
+              <img
+                src={demoLogoUrl}
+                alt="Osmani Collection"
+                className="h-7 w-7 rounded-full object-cover ring-1 ring-[color:var(--color-accent)]/70"
+              />
+              <span className="font-heading text-xl tracking-[0.18em] text-[color:var(--color-primary)]">
+                Osmani Collection
+              </span>
             </Link>
           </nav>
         </div>

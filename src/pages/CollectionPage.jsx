@@ -60,30 +60,30 @@ export default function CollectionPage({ type }) {
     }
 
     return filtered;
-  }, [type, activeFilter, sortBy]);
+  }, [type, activeFilter, sortBy, searchTerm]);
 
   return (
-    <div className="min-h-screen bg-[color:var(--color-bg)]">
+    <div className="min-h-screen bg-(--color-bg)">
       <Navbar />
 
       <main className="mx-auto max-w-7xl px-4 pb-20 pt-10 sm:px-6 lg:px-10 lg:pt-14">
         <header className="mx-auto max-w-3xl text-center">
-          <p className="text-xs uppercase tracking-[0.26em] text-[color:var(--color-accent)]">Fragrance Selection</p>
-          <h1 className="font-heading mt-3 text-5xl text-[color:var(--color-primary)] sm:text-6xl">{collectionTitle}</h1>
-          <p className="mt-4 text-sm leading-relaxed text-[color:var(--color-primary)]/75 sm:text-base">
+          <p className="text-xs uppercase tracking-[0.26em] text-(--color-accent)">Fragrance Selection</p>
+          <h1 className="font-heading mt-3 text-5xl text-(--color-primary) sm:text-6xl">{collectionTitle}</h1>
+          <p className="mt-4 text-sm leading-relaxed text-(--color-primary)/75 sm:text-base">
             Discover premium fragrances crafted for elegance.
           </p>
         </header>
 
         <section className="mt-10">
-          <div className="sticky top-16 z-30 -mx-4 mb-6 bg-[color:var(--color-bg)]/95 px-4 pb-4 pt-2 backdrop-blur sm:-mx-6 sm:px-6 lg:-mx-10 lg:px-10">
-            <div className="rounded-2xl border border-[color:var(--color-primary)]/10 bg-white/70 px-4 py-3">
+          <div className="sticky top-16 z-30 -mx-4 mb-6 bg-(--color-bg)/95 px-4 pb-4 pt-2 backdrop-blur sm:-mx-6 sm:px-6 lg:-mx-10 lg:px-10">
+            <div className="rounded-2xl border border-(--color-primary)/10 bg-white/70 px-4 py-3">
               <input
                 type="search"
                 value={searchTerm}
                 onChange={(event) => setSearchTerm(event.target.value)}
                 placeholder="Search fragrances"
-                className="w-full bg-transparent text-sm text-[color:var(--color-primary)] outline-none"
+                className="w-full bg-transparent text-sm text-(--color-primary) outline-none"
                 aria-label="Search fragrances"
               />
             </div>

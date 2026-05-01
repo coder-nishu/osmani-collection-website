@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../components/common/Navbar";
 import Footer from "../components/common/Footer";
@@ -90,27 +90,30 @@ export default function CheckoutPage() {
     return Object.keys(nextErrors).length === 0;
   };
 
-  const buildWhatsAppMessage = (items, totalAmount) => {
-    const itemsText = items
-      .map(
-        (item) =>
-          `* ${item.name} (${item.size}) x${Number(item.quantity || 1)}`,
-      )
-      .join("\n");
+  const buildWhatsAppMessage = useCallback(
+    (items, totalAmount) => {
+      const itemsText = items
+        .map(
+          (item) =>
+            `* ${item.name} (${item.size}) x${Number(item.quantity || 1)}`,
+        )
+        .join("\n");
 
-    return [
-      "Hi, I placed an order.",
-      "",
-      `Name: ${formValues.name.trim()}`,
-      `Phone: ${formValues.phone.trim()}`,
-      `Address: ${formValues.address.trim()}`,
-      "",
-      "Items:",
-      itemsText,
-      "",
-      `Total: ${formatPrice(totalAmount)}`,
-    ].join("\n");
-  };
+      return [
+        "Hi, I placed an order.",
+        "",
+        `Name: ${formValues.name.trim()}`,
+        `Phone: ${formValues.phone.trim()}`,
+        `Address: ${formValues.address.trim()}`,
+        "",
+        "Items:",
+        itemsText,
+        "",
+        `Total: ${formatPrice(totalAmount)}`,
+      ].join("\n");
+    },
+    [formValues],
+  );
 
   useEffect(() => {
     if (!isModalOpen) {
@@ -143,7 +146,7 @@ export default function CheckoutPage() {
       window.clearTimeout(successTimer);
       window.clearTimeout(redirectTimer);
     };
-  }, [isModalOpen, orderSnapshot, formValues]);
+  }, [isModalOpen, orderSnapshot, buildWhatsAppMessage]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -180,7 +183,7 @@ export default function CheckoutPage() {
         mode: "no-cors", // ✅ correct
         body: JSON.stringify(payload),
       }).catch(() => {});
-    } catch (error) {
+    } catch {
       // no-op: do not block the user flow
     } finally {
       // modal flow handles state and redirect
@@ -188,22 +191,22 @@ export default function CheckoutPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[color:var(--color-bg)]">
+    <div className="min-h-screen bg-(--color-bg)">
       <Navbar />
 
       <main className="mx-auto max-w-6xl px-4 pb-20 pt-10 sm:px-6 lg:px-10">
         <header className="flex flex-col gap-3">
-          <p className="text-xs uppercase tracking-[0.26em] text-[color:var(--color-accent)]">
+          <p className="text-xs uppercase tracking-[0.26em] text-(--color-accent)">
             Checkout
           </p>
-          <h1 className="font-heading text-4xl text-[color:var(--color-primary)] sm:text-5xl">
+          <h1 className="font-heading text-4xl text-(--color-primary) sm:text-5xl">
             Confirm Your Order
           </h1>
         </header>
 
         {cartItems.length === 0 ? (
-          <section className="mt-10 rounded-3xl border border-[color:var(--color-primary)]/10 bg-[color:var(--color-surface)]/60 px-6 py-12 text-center">
-            <p className="text-base text-[color:var(--color-primary)]/70">
+          <section className="mt-10 rounded-3xl border border-(--color-primary)/10 bg-(--color-surface)/60 px-6 py-12 text-center">
+            <p className="text-base text-(--color-primary)/70">
               Your cart is empty. Add your favorite attars and perfumes to
               continue.
             </p>
@@ -225,21 +228,21 @@ export default function CheckoutPage() {
                   showRemove={false}
                 />
               ))}
-              <div className="mt-6 flex items-center justify-between rounded-2xl border border-[color:var(--color-primary)]/10 bg-[color:var(--color-surface)]/70 px-5 py-4">
-                <span className="text-sm uppercase tracking-[0.2em] text-[color:var(--color-primary)]/70">
+              <div className="mt-6 flex items-center justify-between rounded-2xl border border-(--color-primary)/10 bg-(--color-surface)/70 px-5 py-4">
+                <span className="text-sm uppercase tracking-[0.2em] text-(--color-primary)/70">
                   Total
                 </span>
-                <span className="text-lg font-semibold text-[color:var(--color-primary)]">
+                <span className="text-lg font-semibold text-(--color-primary)">
                   {formatPrice(total)}
                 </span>
               </div>
             </div>
 
             <form
-              className="rounded-3xl border border-[color:var(--color-primary)]/10 bg-[color:var(--color-surface)]/70 p-6"
+              className="rounded-3xl border border-(--color-primary)/10 bg-(--color-surface)/70 p-6"
               onSubmit={handleSubmit}
             >
-              <h2 className="text-sm uppercase tracking-[0.26em] text-[color:var(--color-primary)]/70">
+              <h2 className="text-sm uppercase tracking-[0.26em] text-(--color-primary)/70">
                 Delivery Info
               </h2>
 
@@ -250,7 +253,7 @@ export default function CheckoutPage() {
               ) : null}
 
               <div className="mt-6 space-y-4">
-                <label className="block text-xs uppercase tracking-[0.2em] text-[color:var(--color-primary)]/60">
+                <label className="block text-xs uppercase tracking-[0.2em] text-(--color-primary)/60">
                   Name
                   <input
                     type="text"
@@ -258,7 +261,7 @@ export default function CheckoutPage() {
                     value={formValues.name}
                     onChange={handleChange}
                     disabled={isSubmitting || isModalOpen}
-                    className="mt-2 w-full rounded-2xl border border-[color:var(--color-primary)]/15 bg-white/70 px-4 py-3 text-sm text-[color:var(--color-primary)] focus:border-[color:var(--color-accent)] focus:outline-none"
+                    className="mt-2 w-full rounded-2xl border border-(--color-primary)/15 bg-white/70 px-4 py-3 text-sm text-(--color-primary) focus:border-(--color-accent) focus:outline-none"
                     placeholder="Your full name"
                     required
                   />
@@ -269,7 +272,7 @@ export default function CheckoutPage() {
                   ) : null}
                 </label>
 
-                <label className="block text-xs uppercase tracking-[0.2em] text-[color:var(--color-primary)]/60">
+                <label className="block text-xs uppercase tracking-[0.2em] text-(--color-primary)/60">
                   Phone
                   <input
                     type="tel"
@@ -277,7 +280,7 @@ export default function CheckoutPage() {
                     value={formValues.phone}
                     onChange={handleChange}
                     disabled={isSubmitting || isModalOpen}
-                    className="mt-2 w-full rounded-2xl border border-[color:var(--color-primary)]/15 bg-white/70 px-4 py-3 text-sm text-[color:var(--color-primary)] focus:border-[color:var(--color-accent)] focus:outline-none"
+                    className="mt-2 w-full rounded-2xl border border-(--color-primary)/15 bg-white/70 px-4 py-3 text-sm text-(--color-primary) focus:border-(--color-accent) focus:outline-none"
                     placeholder="Phone number"
                     required
                   />
@@ -288,7 +291,7 @@ export default function CheckoutPage() {
                   ) : null}
                 </label>
 
-                <label className="block text-xs uppercase tracking-[0.2em] text-[color:var(--color-primary)]/60">
+                <label className="block text-xs uppercase tracking-[0.2em] text-(--color-primary)/60">
                   Address
                   <textarea
                     name="address"
@@ -296,7 +299,7 @@ export default function CheckoutPage() {
                     onChange={handleChange}
                     rows={4}
                     disabled={isSubmitting || isModalOpen}
-                    className="mt-2 w-full resize-none rounded-2xl border border-[color:var(--color-primary)]/15 bg-white/70 px-4 py-3 text-sm text-[color:var(--color-primary)] focus:border-[color:var(--color-accent)] focus:outline-none"
+                    className="mt-2 w-full resize-none rounded-2xl border border-(--color-primary)/15 bg-white/70 px-4 py-3 text-sm text-(--color-primary) focus:border-(--color-accent) focus:outline-none"
                     placeholder="Full delivery address"
                     required
                   />
@@ -307,7 +310,7 @@ export default function CheckoutPage() {
                   ) : null}
                 </label>
 
-                <label className="flex items-start gap-3 rounded-2xl border border-[color:var(--color-primary)]/12 bg-white/60 px-4 py-3 text-[11px] uppercase tracking-[0.18em] text-[color:var(--color-primary)]/70">
+                <label className="flex items-start gap-3 rounded-2xl border border-(--color-primary)/12 bg-white/60 px-4 py-3 text-[11px] uppercase tracking-[0.18em] text-(--color-primary)/70">
                   <input
                     type="checkbox"
                     checked={isCodChecked}
@@ -318,7 +321,7 @@ export default function CheckoutPage() {
                   />
                   <span>
                     Cash on Delivery
-                    <span className="mt-1 block text-[10px] normal-case tracking-normal text-[color:var(--color-primary)]/60">
+                    <span className="mt-1 block text-[10px] normal-case tracking-normal text-(--color-primary)/60">
                       Dhaka delivery 70tk, outside Dhaka delivery 120tk.
                     </span>
                   </span>
@@ -340,7 +343,7 @@ export default function CheckoutPage() {
                 {isSubmitting ? "Placing Order..." : "Place Order"}
               </button>
 
-              <p className="mt-4 text-xs text-[color:var(--color-primary)]/60">
+              <p className="mt-4 text-xs text-(--color-primary)/60">
                 Orders are confirmed via Cash on Delivery only.
               </p>
             </form>

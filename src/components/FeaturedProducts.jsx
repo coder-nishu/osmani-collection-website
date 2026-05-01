@@ -14,24 +14,65 @@ export default function FeaturedProducts({
 
   return (
     <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-10 lg:py-16">
+      
+      {/* HEADER */}
       <div className="mb-8 sm:mb-10">
-        <div>
-          <p className="text-xs uppercase tracking-[0.26em] text-(--color-accent)">Curated Selection</p>
-          <h2 className="font-heading mt-2 text-4xl text-(--color-primary) sm:text-5xl">{title}</h2>
-          {subtitle ? <p className="mt-3 max-w-2xl text-sm text-(--color-primary)/72">{subtitle}</p> : null}
-        </div>
+        <p className="text-xs uppercase tracking-[0.26em] text-(--color-accent)">
+          Curated Selection
+        </p>
+        <h2 className="font-heading mt-2 text-4xl text-(--color-primary) sm:text-5xl">
+          {title}
+        </h2>
+        {subtitle && (
+          <p className="mt-3 max-w-2xl text-sm text-(--color-primary)/72">
+            {subtitle}
+          </p>
+        )}
       </div>
 
-      <div className="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-6 [scrollbar-width:none] [-webkit-overflow-scrolling:touch] [&::-webkit-scrollbar]:hidden sm:gap-5 md:mx-0 md:grid md:grid-cols-2 md:gap-6 md:overflow-visible md:px-0 lg:grid-cols-3 xl:grid-cols-4">
+      {/* 🔥 SCROLL CONTAINER (FIXED) */}
+      <div
+        className="
+        flex gap-4 overflow-x-auto px-4 pb-4
+        snap-x snap-mandatory
+        touch-pan-x
+        scroll-smooth
+        cursor-grab active:cursor-grabbing
+        [scrollbar-width:none]
+        [-ms-overflow-style:none]
+        [&::-webkit-scrollbar]:hidden
+
+        md:grid md:grid-cols-2 md:gap-6 md:overflow-visible md:px-0
+        lg:grid-cols-3 xl:grid-cols-4
+      "
+      >
         {featuredProducts.map((product) => (
-          <div key={product.id} className="w-[75%] min-w-[260px] shrink-0 snap-start md:w-auto md:min-w-0 md:shrink">
+          <div
+            key={product.id}
+            className="min-w-[220px] w-[75%] shrink-0 snap-start md:w-auto md:min-w-0"
+          >
             <ProductCard product={product} />
           </div>
         ))}
       </div>
 
+      {/* CTA BUTTON */}
       <div className="mt-10 flex justify-center md:justify-end relative z-[60]">
-        <Link to={buttonHref} className="btn-brand flex items-center justify-center rounded-full px-6 py-3.5 text-[11px] w-full max-w-[240px] md:w-auto active:scale-95 transition-transform" style={{ WebkitTapHighlightColor: 'transparent' }}>
+        <Link
+          to={buttonHref}
+          className="
+            btn-brand 
+            flex items-center justify-center 
+            rounded-full 
+            px-6 py-3.5 
+            text-[11px] 
+            w-full max-w-[240px] 
+            md:w-auto 
+            active:scale-95 
+            transition-transform
+          "
+          style={{ WebkitTapHighlightColor: "transparent" }}
+        >
           {buttonLabel}
         </Link>
       </div>

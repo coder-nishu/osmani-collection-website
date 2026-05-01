@@ -19,23 +19,25 @@ export default function Home() {
       <MarqueeSection />
       <CollectionSection />
 
-      <FeaturedProducts
-        title="Featured Attars"
-        subtitle="Small-batch Arabian attars with rich depth and refined longevity."
-        type="attar"
-        products={featuredAttars}
-        buttonLabel="View All Attars ->"
-        buttonHref="/attar"
-      />
+      <div className="pb-24">
+        <FeaturedProducts
+          title="Featured Attars"
+          subtitle="Small-batch Arabian attars with rich depth and refined longevity."
+          type="attar"
+          products={featuredAttars}
+          buttonLabel="View All Attars ->"
+          buttonHref="/attar"
+        />
 
-      <FeaturedProducts
-        title="Featured Perfumes"
-        subtitle="Modern premium blends crafted for elegant projection and presence."
-        type="perfume"
-        products={featuredPerfumes}
-        buttonLabel="View All Perfumes ->"
-        buttonHref="/perfume"
-      />
+        <FeaturedProducts
+          title="Featured Perfumes"
+          subtitle="Modern premium blends crafted for elegant projection and presence."
+          type="perfume"
+          products={featuredPerfumes}
+          buttonLabel="View All Perfumes ->"
+          buttonHref="/perfume"
+        />
+      </div>
 
       <CTASection />
       <WhatsAppFloating />

@@ -47,17 +47,16 @@ export default function ProductCard({ product }) {
   
   // 👉 Card click → product page
   const handleCardClick = (e) => {
-    if (e.defaultPrevented) return;
-
-    if (e.target.closest("button")) return;
-
+    if (e.target.closest("button") || e.target.nodeName === "BUTTON") {
+      return;
+    }
     navigate(productPath);
   };
 
   return (
     <article
       onClick={handleCardClick}
-      className="group cursor-pointer overflow-hidden rounded-2xl border border-(--color-primary)/10 bg-(--color-bg) transition-all duration-300 md:hover:-translate-y-0.5 md:hover:scale-[1.01]"
+      className="group flex flex-col cursor-pointer overflow-hidden rounded-2xl border border-(--color-primary)/10 bg-(--color-bg) transition-all duration-300 md:hover:-translate-y-0.5 md:hover:scale-[1.01]"
     >
       {/* IMAGE */}
       <div className="relative flex h-40 items-center justify-center overflow-hidden bg-white p-4 sm:h-44">

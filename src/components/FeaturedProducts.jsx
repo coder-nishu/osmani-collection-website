@@ -22,7 +22,7 @@ export default function FeaturedProducts({
         </div>
       </div>
 
-      <div className="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden sm:gap-5 md:mx-0 md:grid md:grid-cols-2 md:gap-6 md:overflow-visible md:px-0 lg:grid-cols-3 xl:grid-cols-4">
+      <div className="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-3 [scrollbar-width:none] [touch-action:pan-x] [&::-webkit-scrollbar]:hidden sm:gap-5 md:mx-0 md:grid md:grid-cols-2 md:gap-6 md:overflow-visible md:px-0 lg:grid-cols-3 xl:grid-cols-4">
         {featuredProducts.map((product) => (
           <div key={product.id} className="w-[72%] shrink-0 snap-start md:w-auto md:shrink">
             <ProductCard product={product} />
@@ -31,7 +31,7 @@ export default function FeaturedProducts({
       </div>
 
       <div className="mt-6 flex justify-center md:justify-end">
-        <Link to={buttonHref} className="btn-brand rounded-full px-6 py-2.5 text-[11px]">
+        <Link to={buttonHref} className="btn-brand relative z-10 rounded-full px-6 py-2.5 text-[11px]">
           {buttonLabel}
         </Link>
       </div>

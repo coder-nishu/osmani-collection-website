@@ -22,16 +22,16 @@ export default function FeaturedProducts({
         </div>
       </div>
 
-      <div className="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-3 sm:gap-5 md:mx-0 md:grid md:grid-cols-2 md:gap-6 md:overflow-visible md:px-0 lg:grid-cols-3 xl:grid-cols-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+      <div className="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-6 [scrollbar-width:none] [-webkit-overflow-scrolling:touch] [&::-webkit-scrollbar]:hidden sm:gap-5 md:mx-0 md:grid md:grid-cols-2 md:gap-6 md:overflow-visible md:px-0 lg:grid-cols-3 xl:grid-cols-4">
         {featuredProducts.map((product) => (
-          <div key={product.id} className="w-[72%] shrink-0 snap-start md:w-auto md:shrink">
+          <div key={product.id} className="w-[75%] min-w-[260px] shrink-0 snap-start md:w-auto md:min-w-0 md:shrink">
             <ProductCard product={product} />
           </div>
         ))}
       </div>
 
-      <div className="mt-8 flex justify-center md:justify-end">
-        <Link to={buttonHref} className="btn-brand block rounded-full px-6 py-2.5 text-[11px] text-center w-full max-w-[200px] md:w-auto relative z-50 pointer-events-auto">
+      <div className="mt-10 flex justify-center md:justify-end relative z-[60]">
+        <Link to={buttonHref} className="btn-brand flex items-center justify-center rounded-full px-6 py-3.5 text-[11px] w-full max-w-[240px] md:w-auto active:scale-95 transition-transform" style={{ WebkitTapHighlightColor: 'transparent' }}>
           {buttonLabel}
         </Link>
       </div>

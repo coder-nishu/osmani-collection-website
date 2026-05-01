@@ -45,9 +45,9 @@ export default function WhatsAppFloating() {
   };
 
   return (
-    <div ref={containerRef} className="fixed bottom-[90px] right-4 z-50 flex flex-col items-end md:hidden">
+    <div ref={containerRef} className="fixed bottom-[90px] right-4 z-[100] flex flex-col items-end md:hidden pointer-events-none">
       <div
-        className={`mb-3 w-[260px] rounded-xl border border-(--color-primary)/12 bg-white p-3 shadow-[0_16px_34px_rgba(23,33,25,0.18)] transition-all duration-200 ease-out origin-bottom-right ${
+        className={`mb-3 w-[260px] rounded-xl border border-(--color-primary)/12 bg-white p-3 shadow-[0_16px_34px_rgba(23,33,25,0.18)] transition-all duration-200 ease-out origin-bottom-right pointer-events-auto ${
           isOpen ? "scale-100 opacity-100" : "pointer-events-none scale-95 opacity-0"
         }`}
       >
@@ -98,7 +98,7 @@ export default function WhatsAppFloating() {
       <button
         type="button"
         onClick={() => setIsOpen((prev) => !prev)}
-        className="whatsapp-float-attention inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#25D366] to-[#1ebe57] px-4 py-2 text-white shadow-[0_14px_28px_rgba(0,0,0,0.22)] transition-transform duration-300 md:hover:scale-105"
+        className="whatsapp-float-attention inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#25D366] to-[#1ebe57] px-4 py-2 text-white shadow-[0_14px_28px_rgba(0,0,0,0.22)] transition-transform duration-300 md:hover:scale-105 pointer-events-auto"
         aria-label="Open WhatsApp chat"
       >
         <svg viewBox="0 0 48 48" className="h-6 w-6" aria-hidden="true">

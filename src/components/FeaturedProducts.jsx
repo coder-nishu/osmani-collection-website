@@ -30,8 +30,8 @@ export default function FeaturedProducts({
         ))}
       </div>
 
-      <div className="mt-6 flex justify-center md:justify-end">
-        <Link to={buttonHref} className="btn-brand relative z-10 rounded-full px-6 py-2.5 text-[11px]">
+      <div className="relative z-20 mt-8 flex justify-center md:justify-end pointer-events-auto cursor-pointer">
+        <Link to={buttonHref} className="btn-brand block rounded-full px-6 py-2.5 text-[11px] text-center w-full max-w-[200px] md:w-auto">
           {buttonLabel}
         </Link>
       </div>

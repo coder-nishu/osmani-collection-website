@@ -18,7 +18,6 @@ export default function FeaturedProducts({
 
   return (
     <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-10 lg:py-16">
-      
       {/* HEADER */}
       <div className="mb-6 sm:mb-8">
         <p className="text-xs uppercase tracking-[0.26em] text-(--color-accent)">
@@ -60,18 +59,18 @@ export default function FeaturedProducts({
       <div
         onScroll={() => setShowHint(false)}
         className="
-        flex gap-4 overflow-x-auto px-4 pb-4
-        snap-x snap-mandatory
-        touch-pan-x
-        scroll-smooth
-        cursor-grab active:cursor-grabbing
-        [scrollbar-width:none]
-        [-ms-overflow-style:none]
-        [&::-webkit-scrollbar]:hidden
+    flex gap-4 overflow-x-auto px-4 pb-4
+    snap-x snap-mandatory
+    touch-auto
+    scroll-smooth
+    cursor-grab active:cursor-grabbing
+    [scrollbar-width:none]
+    [-ms-overflow-style:none]
+    [&::-webkit-scrollbar]:hidden
 
-        md:grid md:grid-cols-2 md:gap-6 md:overflow-visible md:px-0
-        lg:grid-cols-3 xl:grid-cols-4
-      "
+    md:grid md:grid-cols-2 md:gap-6 md:overflow-visible md:px-0
+    lg:grid-cols-3 xl:grid-cols-4
+  "
       >
         {featuredProducts.map((product) => (
           <div

@@ -18,6 +18,7 @@ export default function ProductPage() {
   const [detailsSlug, setDetailsSlug] = useState(null);
   const [toastMessage, setToastMessage] = useState("");
   const [activeImageIndex, setActiveImageIndex] = useState(0);
+  const [quantity, setQuantity] = useState(1);
   const carouselRef = useRef(null);
 
   const defaultSize = useMemo(() => {
@@ -110,6 +111,10 @@ export default function ProductPage() {
     return () => clearTimeout(timeout);
   }, [toastMessage]);
 
+  useEffect(() => {
+    setQuantity(1);
+  }, [product?.id]);
+
   const handleAddToCart = () => {
     if (!product || !selectedVariant) return;
 
@@ -119,6 +124,7 @@ export default function ProductPage() {
       size: selectedVariant.size,
       price: selectedVariant.price,
       image: selectedVariant.image || product.image,
+      quantity,
     });
 
     setToastMessage("Added to cart");
@@ -133,7 +139,7 @@ export default function ProductPage() {
       size: selectedVariant.size,
       price: selectedVariant.price,
       image: selectedVariant.image || product.image,
-      quantity: 1,
+      quantity,
     });
 
     navigate("/checkout");
@@ -215,7 +221,7 @@ export default function ProductPage() {
           </div>
 
           {/* CONTENT */}
-          <div className="space-y-4">
+          <div className="space-y-3">
 
             {/* CATEGORY */}
             <p className="text-xs uppercase tracking-[0.2em] text-(--color-accent)">
@@ -251,10 +257,10 @@ export default function ProductPage() {
                           [product.slug]: entry.size,
                         }))
                       }
-                      className={`px-3 py-1.5 text-xs rounded-full border ${
+                      className={`px-3 py-1.5 text-xs rounded-full border transition ${
                         active
-                          ? "bg-(--color-accent)/20 border-(--color-accent)"
-                          : "border-(--color-primary)/20"
+                          ? "bg-(--color-primary) border-(--color-primary) text-(--color-accent)"
+                          : "border-(--color-primary)/30 bg-white/90 text-(--color-primary)"
                       }`}
                     >
                       {entry.size}
@@ -264,10 +270,40 @@ export default function ProductPage() {
               </div>
             </div>
 
-            {/* PRICE */}
-            <p className="text-2xl font-semibold text-(--color-primary)">
-              {formatPrice(selectedVariant?.price ?? 0)}
-            </p>
+            {/* PRICE + QUANTITY */}
+            <div className="flex flex-wrap items-center gap-4">
+              <p className="text-2xl font-semibold text-(--color-primary)">
+                {formatPrice(selectedVariant?.price ?? 0)}
+              </p>
+
+              <div className="flex items-center gap-2">
+                <span className="text-[11px] uppercase tracking-[0.18em] text-(--color-primary)/60">
+                  Qty
+                </span>
+                <div className="flex items-center gap-2 rounded-full border border-(--color-primary)/15 bg-white px-2 py-1">
+                  <button
+                    type="button"
+                    onClick={() => setQuantity((prev) => Math.max(1, prev - 1))}
+                    disabled={quantity <= 1}
+                    className="h-6 w-6 rounded-full text-sm text-(--color-primary) transition disabled:opacity-40"
+                    aria-label="Decrease quantity"
+                  >
+                    -
+                  </button>
+                  <span className="min-w-[1.25rem] text-center text-sm text-(--color-primary)">
+                    {quantity}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => setQuantity((prev) => prev + 1)}
+                    className="h-6 w-6 rounded-full text-sm text-(--color-primary) transition"
+                    aria-label="Increase quantity"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+            </div>
 
             {/* BUTTONS */}
             <div className="flex flex-col gap-2 sm:flex-row">
@@ -281,7 +317,7 @@ export default function ProductPage() {
 
               <button
                 onClick={handleAddToCart}
-                className="flex-1 rounded-full border border-(--color-primary)/20 py-3 text-sm uppercase tracking-[0.14em]"
+                className="flex-1 rounded-full border border-(--color-primary)/20 py-3 text-sm uppercase tracking-[0.14em] text-(--color-primary)"
               >
                 Add to Cart
               </button>
@@ -292,7 +328,7 @@ export default function ProductPage() {
               href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
                 `I want to order ${product.name}`
               )}`}
-              className="block text-center border border-(--color-primary)/20 py-3 rounded-full text-sm uppercase"
+              className="block text-center border border-(--color-primary)/20 py-3 rounded-full text-sm uppercase text-(--color-primary)"
             >
               Message on WhatsApp
             </a>

@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../components/common/Navbar";
 import Footer from "../components/common/Footer";
 import CartItem from "../components/cart/CartItem";
-import { clearCart, getCart, removeFromCart } from "../utils/cartStorage";
+import { clearCart, getCart, removeFromCart, updateCartItemQuantity } from "../utils/cartStorage";
 import { formatPrice } from "../utils/helpers";
 
 export default function CartPage() {
@@ -33,6 +33,10 @@ export default function CartPage() {
 
   const handleRemove = (index) => {
     setCartItems(removeFromCart(index));
+  };
+
+  const handleQuantityChange = (index, quantity) => {
+    setCartItems(updateCartItemQuantity(index, quantity));
   };
 
   const handleClear = () => {
@@ -67,7 +71,13 @@ export default function CartPage() {
           <section className="mt-10 grid gap-8 lg:grid-cols-[minmax(0,1fr)_320px]">
             <div className="space-y-4">
               {cartItems.map((item, index) => (
-                <CartItem key={`${item.id}-${index}`} item={item} index={index} onRemove={handleRemove} />
+                <CartItem
+                  key={`${item.id}-${index}`}
+                  item={item}
+                  index={index}
+                  onRemove={handleRemove}
+                  onQuantityChange={handleQuantityChange}
+                />
               ))}
             </div>
 

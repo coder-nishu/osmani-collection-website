@@ -1,20 +1,12 @@
 import { Link } from "react-router-dom";
 
-const brandLogoUrl =
-  "https://images.unsplash.com/photo-1563170351-be82bc888aa4?auto=format&fit=crop&w=400&q=80";
+const brandLogoUrl = "/osmani_favicon.jpg";
 
 const quickLinks = [
   { label: "Home", href: "/" },
   { label: "Attar", href: "/attar" },
   { label: "Perfume", href: "/perfume" },
   { label: "Collections", href: "/collections" },
-];
-
-const supportLinks = [
-  { label: "Contact Us", href: "/contact" },
-  { label: "About Us", href: "/about" },
-  { label: "Privacy Policy", href: "/privacy" },
-  { label: "Terms & Conditions", href: "/terms" },
 ];
 
 function FacebookIcon() {
@@ -56,7 +48,7 @@ export default function Footer() {
   return (
     <footer className="font-body bg-[color:var(--color-primary)] text-[color:var(--color-bg)]">
       <div className="mx-auto max-w-7xl px-4 pb-6 pt-14 sm:px-6 lg:px-10 lg:pt-16">
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-2 xl:grid-cols-4">
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-2 xl:grid-cols-3">
           <div>
             <div className="flex items-center gap-3">
               <img src={brandLogoUrl} alt="Osmani Collection logo" className="h-11 w-11 rounded-full object-cover" />
@@ -71,7 +63,6 @@ export default function Footer() {
           </div>
 
           <FooterLinkGroup title="Quick Links" links={quickLinks} />
-          <FooterLinkGroup title="Customer Support" links={supportLinks} />
 
           <div>
             <h3 className="text-sm font-semibold uppercase tracking-[0.16em] text-[color:var(--color-accent)]">

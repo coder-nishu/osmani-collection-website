@@ -4,7 +4,7 @@ import Navbar from "../components/common/Navbar";
 import Footer from "../components/common/Footer";
 import CartItem from "../components/cart/CartItem";
 import OrderModal from "../components/OrderModal";
-import { getCart } from "../utils/cartStorage";
+import { getCart, removeFromCart, updateCartItemQuantity } from "../utils/cartStorage";
 import { formatPrice } from "../utils/helpers";
 
 const API_URL =
@@ -55,6 +55,14 @@ export default function CheckoutPage() {
       ),
     [cartItems],
   );
+
+  const handleRemove = (index) => {
+    setCartItems(removeFromCart(index));
+  };
+
+  const handleQuantityChange = (index, quantity) => {
+    setCartItems(updateCartItemQuantity(index, quantity));
+  };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -225,7 +233,8 @@ export default function CheckoutPage() {
                   key={`${item.id}-${index}`}
                   item={item}
                   index={index}
-                  showRemove={false}
+                  onRemove={handleRemove}
+                  onQuantityChange={handleQuantityChange}
                 />
               ))}
               <div className="mt-6 flex items-center justify-between rounded-2xl border border-(--color-primary)/10 bg-(--color-surface)/70 px-5 py-4">

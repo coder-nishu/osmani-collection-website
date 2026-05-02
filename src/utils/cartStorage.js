@@ -66,6 +66,16 @@ export function removeFromCart(index) {
   return nextCart;
 }
 
+export function updateCartItemQuantity(index, quantity) {
+  const cart = readCart();
+  const safeQuantity = Math.max(1, Number(quantity || 1));
+  const nextCart = cart.map((item, itemIndex) =>
+    itemIndex === index ? { ...item, quantity: safeQuantity } : item,
+  );
+  writeCart(nextCart);
+  return nextCart;
+}
+
 export function clearCart() {
   writeCart([]);
   return [];

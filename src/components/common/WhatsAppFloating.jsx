@@ -45,7 +45,7 @@ export default function WhatsAppFloating() {
   };
 
   return (
-    <div ref={containerRef} className="fixed bottom-[90px] right-4 z-[100] flex flex-col items-end md:hidden pointer-events-none">
+    <div ref={containerRef} className="fixed bottom-[90px] right-4 z-[100] flex flex-col items-end pointer-events-none md:bottom-6 md:right-6">
       <div
         className={`mb-3 w-[260px] rounded-xl border border-(--color-primary)/12 bg-white p-3 shadow-[0_16px_34px_rgba(23,33,25,0.18)] transition-all duration-200 ease-out origin-bottom-right pointer-events-auto ${
           isOpen ? "scale-100 opacity-100" : "pointer-events-none scale-95 opacity-0"

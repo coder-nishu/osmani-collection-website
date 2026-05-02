@@ -17,7 +17,7 @@ export default function FeaturedProducts({
   const [showHint, setShowHint] = useState(true);
 
   return (
-    <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-10 lg:py-16">
+    <section className="mx-auto max-w-7xl px-4 pt-8 pb-10 sm:px-6 sm:py-12 lg:px-10 lg:py-12">
       {/* HEADER */}
       <div className="mb-6 sm:mb-8">
         <p className="text-xs uppercase tracking-[0.26em] text-(--color-accent)">
@@ -83,7 +83,7 @@ export default function FeaturedProducts({
       </div>
 
       {/* CTA BUTTON */}
-      <div className="mt-10 flex justify-center md:justify-end relative z-[60]">
+      <div className="mt-6 flex justify-center md:justify-end relative z-[60]">
         <Link
           to={buttonHref}
           className="

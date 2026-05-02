@@ -8,6 +8,10 @@ const demoImageByType = {
     "https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=900&q=80",
 };
 
+function isExternalImage(value) {
+  return typeof value === "string" && value.startsWith("http");
+}
+
 function slugify(value) {
   return String(value ?? "")
     .toLowerCase()
@@ -20,7 +24,7 @@ function slugify(value) {
 }
 
 function mapProduct(product, slugCounts) {
-  const hasExternalImage = typeof product.image === "string" && product.image.startsWith("http");
+  const fallbackImage = demoImageByType[product.type] ?? demoImageByType.perfume;
   const baseSlug = slugify(product.name) || slugify(product.id) || "fragrance";
   const currentCount = (slugCounts.get(baseSlug) ?? 0) + 1;
 
@@ -28,10 +32,27 @@ function mapProduct(product, slugCounts) {
 
   const slug = currentCount === 1 ? baseSlug : `${baseSlug}-${currentCount}`;
 
+  const rawVariants = Array.isArray(product.variants)
+    ? product.variants
+    : Array.isArray(product.pricing)
+      ? product.pricing.map((entry) => ({ ...entry, image: product.image }))
+      : [];
+
+  const variants = rawVariants.map((entry) => ({
+    ...entry,
+    image: isExternalImage(entry.image) ? entry.image : fallbackImage,
+  }));
+
+  const images = variants.length
+    ? variants.map((entry) => entry.image)
+    : [isExternalImage(product.image) ? product.image : fallbackImage];
+
   return {
     ...product,
     slug,
-    image: hasExternalImage ? product.image : demoImageByType[product.type] ?? demoImageByType.perfume,
+    variants,
+    images,
+    image: images[0] ?? fallbackImage,
   };
 }
 

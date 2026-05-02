@@ -7,19 +7,19 @@ export default function ProductCard({ product }) {
   const navigate = useNavigate();
 
   const productPath = `/product/${product.slug ?? product.id}`;
-  const pricing = product.pricing ?? [];
+  const variants = product.variants ?? [];
 
   const defaultSize =
-    pricing.find((entry) => entry.size === "3ml")?.size ||
-    pricing[0]?.size ||
+    variants.find((entry) => entry.size === "3ml")?.size ||
+    variants[0]?.size ||
     "";
 
   const [selectedSize, setSelectedSize] = useState(defaultSize);
 
-  const selectedPricing = useMemo(
+  const selectedVariant = useMemo(
     () =>
-      pricing.find((entry) => entry.size === selectedSize) || pricing[0],
-    [pricing, selectedSize]
+      variants.find((entry) => entry.size === selectedSize) || variants[0],
+    [variants, selectedSize]
   );
 
   const notePreview =
@@ -30,14 +30,14 @@ export default function ProductCard({ product }) {
     e.preventDefault();
     e.stopPropagation();
 
-    if (!selectedPricing) return;
+    if (!selectedVariant) return;
 
     addToCart({
       id: product.id,
       name: product.name,
-      size: selectedPricing.size,
-      price: selectedPricing.price,
-      image: product.image,
+      size: selectedVariant.size,
+      price: selectedVariant.price,
+      image: selectedVariant.image || product.image,
       quantity: 1,
     });
 
@@ -61,7 +61,7 @@ export default function ProductCard({ product }) {
       {/* IMAGE */}
       <div className="relative flex h-40 items-center justify-center overflow-hidden bg-white p-4 sm:h-44">
         <img
-          src={product.image}
+          src={selectedVariant?.image || product.image}
           alt={product.name}
           className="h-full w-full object-contain transition-transform duration-300 md:group-hover:scale-[1.03]"
         />
@@ -81,7 +81,7 @@ export default function ProductCard({ product }) {
 
         {/* SIZE SELECT */}
         <div className="flex flex-wrap gap-2">
-          {pricing.map((entry) => {
+          {variants.map((entry) => {
             const active = entry.size === selectedSize;
 
             return (
@@ -106,7 +106,7 @@ export default function ProductCard({ product }) {
         {/* PRICE + CTA */}
         <div className="mt-2 flex items-center justify-between gap-3">
           <p className="text-sm font-semibold text-(--color-primary)">
-            {formatPrice(selectedPricing?.price || 0)}
+            {formatPrice(selectedVariant?.price || 0)}
           </p>
 
           <button

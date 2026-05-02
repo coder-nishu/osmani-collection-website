@@ -3,6 +3,6 @@ export function formatPrice(value) {
 }
 
 export function getStartingPrice(product) {
-  const prices = (product.pricing ?? []).map((entry) => entry.price);
+  const prices = (product.variants ?? product.pricing ?? []).map((entry) => entry.price);
   return prices.length ? Math.min(...prices) : 0;
 }

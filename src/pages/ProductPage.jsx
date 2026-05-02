@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import Navbar from "../components/common/Navbar";
 import Footer from "../components/common/Footer";
@@ -17,16 +17,92 @@ export default function ProductPage() {
   const [selectedSizeBySlug, setSelectedSizeBySlug] = useState({});
   const [detailsSlug, setDetailsSlug] = useState(null);
   const [toastMessage, setToastMessage] = useState("");
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
+  const carouselRef = useRef(null);
 
-  const selectedSize =
-    selectedSizeBySlug[product?.slug] ?? product?.pricing?.[0]?.size ?? "";
+  const defaultSize = useMemo(() => {
+    if (!product?.variants?.length) {
+      return "";
+    }
 
-  const selectedPricing = useMemo(
+    return (
+      product.variants.find((entry) => entry.size === "3ml")?.size ||
+      product.variants[0]?.size ||
+      ""
+    );
+  }, [product]);
+
+  const selectedSize = selectedSizeBySlug[product?.slug] ?? defaultSize;
+
+  const selectedVariant = useMemo(
     () =>
-      product?.pricing?.find((entry) => entry.size === selectedSize) ??
-      product?.pricing?.[0],
+      product?.variants?.find((entry) => entry.size === selectedSize) ??
+      product?.variants?.[0],
     [product, selectedSize]
   );
+
+  const carouselImages = useMemo(() => {
+    if (!product) {
+      return [];
+    }
+
+    const variantImages = (product.variants ?? [])
+      .map((entry) => entry.image)
+      .filter(Boolean);
+
+    if (variantImages.length) {
+      return variantImages;
+    }
+
+    return product.image ? [product.image] : [];
+  }, [product]);
+
+  const scrollToIndex = useCallback((index) => {
+    if (!carouselRef.current || carouselImages.length === 0) {
+      return;
+    }
+
+    const safeIndex = Math.max(0, Math.min(index, carouselImages.length - 1));
+    carouselRef.current.scrollTo({
+      left: carouselRef.current.clientWidth * safeIndex,
+      behavior: "smooth",
+    });
+    setActiveImageIndex(safeIndex);
+  }, [carouselImages.length]);
+
+  useEffect(() => {
+    if (!carouselRef.current) {
+      return undefined;
+    }
+
+    const handleScroll = () => {
+      const container = carouselRef.current;
+      if (!container) {
+        return;
+      }
+      const nextIndex = Math.round(container.scrollLeft / container.clientWidth);
+      setActiveImageIndex(Math.max(0, Math.min(nextIndex, carouselImages.length - 1)));
+    };
+
+    const container = carouselRef.current;
+    container.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+
+    return () => {
+      container.removeEventListener("scroll", handleScroll);
+    };
+  }, [carouselImages.length]);
+
+  useEffect(() => {
+    if (!product?.variants?.length) {
+      return;
+    }
+
+    const nextIndex = product.variants.findIndex((entry) => entry.size === selectedSize);
+    if (nextIndex >= 0) {
+      scrollToIndex(nextIndex);
+    }
+  }, [product, selectedSize, scrollToIndex]);
 
   useEffect(() => {
     if (!toastMessage) return;
@@ -35,28 +111,28 @@ export default function ProductPage() {
   }, [toastMessage]);
 
   const handleAddToCart = () => {
-    if (!product || !selectedPricing) return;
+    if (!product || !selectedVariant) return;
 
     addToCart({
       id: product.id,
       name: product.name,
-      size: selectedPricing.size,
-      price: selectedPricing.price,
-      image: product.image,
+      size: selectedVariant.size,
+      price: selectedVariant.price,
+      image: selectedVariant.image || product.image,
     });
 
     setToastMessage("Added to cart");
   };
 
   const handleBuyNow = () => {
-    if (!product || !selectedPricing) return;
+    if (!product || !selectedVariant) return;
 
     addToCart({
       id: product.id,
       name: product.name,
-      size: selectedPricing.size,
-      price: selectedPricing.price,
-      image: product.image,
+      size: selectedVariant.size,
+      price: selectedVariant.price,
+      image: selectedVariant.image || product.image,
       quantity: 1,
     });
 
@@ -94,12 +170,48 @@ export default function ProductPage() {
         <section className="grid gap-6 lg:grid-cols-2 lg:gap-12">
 
           {/* IMAGE */}
-          <div className="rounded-2xl overflow-hidden border border-(--color-primary)/10 bg-white ">
-            <img
-              src={product.image}
-              alt={product.name}
-              className="w-full h-[260px] sm:h-[360px] lg:h-[500px] object-contain bg-white"
-            />
+          <div className="space-y-3">
+            <div className="rounded-2xl overflow-hidden border border-(--color-primary)/10 bg-white">
+              <div
+                ref={carouselRef}
+                className="
+                  flex overflow-x-auto snap-x snap-mandatory scroll-smooth
+                  [scrollbar-width:none]
+                  [-ms-overflow-style:none]
+                  [&::-webkit-scrollbar]:hidden
+                "
+              >
+                {carouselImages.map((image, index) => (
+                  <div key={`${product.id}-image-${index}`} className="min-w-full snap-start">
+                    <div className="flex h-[260px] w-full items-center justify-center bg-white sm:h-[360px] lg:h-[500px]">
+                      <img
+                        src={image}
+                        alt={product.name}
+                        className="h-full w-full object-contain"
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {carouselImages.length > 1 ? (
+              <div className="flex items-center justify-center gap-2">
+                {carouselImages.map((_, index) => (
+                  <button
+                    key={`${product.id}-dot-${index}`}
+                    type="button"
+                    onClick={() => scrollToIndex(index)}
+                    aria-label={`Show image ${index + 1}`}
+                    className={`h-2.5 w-2.5 rounded-full transition-all duration-200 ${
+                      index === activeImageIndex
+                        ? "bg-(--color-primary)"
+                        : "bg-(--color-primary)/25"
+                    }`}
+                  />
+                ))}
+              </div>
+            ) : null}
           </div>
 
           {/* CONTENT */}
@@ -127,8 +239,8 @@ export default function ProductPage() {
               </p>
 
               <div className="mt-2 flex flex-wrap gap-2">
-                {product.pricing.map((entry) => {
-                  const active = entry.size === selectedPricing?.size;
+                {product.variants.map((entry) => {
+                  const active = entry.size === selectedVariant?.size;
 
                   return (
                     <button
@@ -154,7 +266,7 @@ export default function ProductPage() {
 
             {/* PRICE */}
             <p className="text-2xl font-semibold text-(--color-primary)">
-              {formatPrice(selectedPricing?.price ?? 0)}
+              {formatPrice(selectedVariant?.price ?? 0)}
             </p>
 
             {/* BUTTONS */}

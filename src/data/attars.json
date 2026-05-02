@@ -9,15 +9,30 @@
     "projection": "Soft",
     "longevity": "6-8 hours",
     "seasons": ["spring", "day"],
-    "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg",
-    "pricing": [
-      { "size": "3ml", "price": 300 },
-      { "size": "6ml", "price": 550 },
-      { "size": "12ml", "price": 990 }
+    "variants": [
+      { "size": "3ml", "price": 300, "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg" },
+      { "size": "6ml", "price": 550, "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg" },
+      { "size": "12ml", "price": 990, "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg" }
     ]
   },
   {
     "id": "attar_002",
+    "name": "Sultan",
+    "type": "attar",
+    "category": "premium",
+    "description": "A classic royal attar with smooth and warm notes.",
+    "notes": ["Amber", "Warm", "Sweet"],
+    "projection": "Moderate",
+    "longevity": "8 hours",
+    "seasons": ["winter", "night"],
+    "variants": [
+      { "size": "3ml", "price": 300, "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg" },
+      { "size": "6ml", "price": 550, "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg" },
+      { "size": "12ml", "price": 990, "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg" }
+    ]
+  },
+  {
+    "id": "attar_003",
     "name": "Khanjar",
     "type": "attar",
     "category": "premium",
@@ -25,81 +40,55 @@
     "notes": ["Oud", "Spicy", "Woody"],
     "projection": "Strong",
     "longevity": "10-12 hours",
-    "seasons": ["fall", "winter", "night"],
-    "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg",
-    "pricing": [
-      { "size": "3ml", "price": 350 },
-      { "size": "6ml", "price": 650 },
-      { "size": "12ml", "price": 1250 }
-    ]
-  },
-  {
-    "id": "attar_003",
-    "name": "Bakarat Rouje",
-    "type": "attar",
-    "category": "platinum",
-    "description": "Sweet luxurious fragrance inspired by Baccarat Rouge style.",
-    "notes": ["Amber", "Sweet", "Woody"],
-    "projection": "Strong",
-    "longevity": "12+ hours",
     "seasons": ["winter", "night"],
-    "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg",
-    "pricing": [
-      { "size": "3ml", "price": 400 },
-      { "size": "6ml", "price": 800 },
-      { "size": "12ml", "price": 1500 }
+    "variants": [
+      { "size": "3ml", "price": 350, "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg" },
+      { "size": "6ml", "price": 650, "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg" },
+      { "size": "12ml", "price": 1250, "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg" }
     ]
   },
   {
     "id": "attar_004",
-    "name": "Mukhallat Ahmar",
+    "name": "Red African",
     "type": "attar",
-    "category": "platinum",
-    "description": "Rich oriental blend with sweet and spicy depth.",
-    "notes": ["Amber", "Spicy", "Sweet"],
+    "category": "premium",
+    "description": "Warm spicy fragrance with exotic depth.",
+    "notes": ["Spicy", "Warm", "Woody"],
     "projection": "Strong",
-    "longevity": "10-12 hours",
-    "seasons": ["winter", "fall", "night"],
-    "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg",
-    "pricing": [
-      { "size": "3ml", "price": 590 },
-      { "size": "6ml", "price": 1070 },
-      { "size": "12ml", "price": 2000 }
+    "longevity": "10 hours",
+    "variants": [
+      { "size": "3ml", "price": 380, "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg" },
+      { "size": "6ml", "price": 690, "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg" },
+      { "size": "12ml", "price": 1350, "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg" }
     ]
   },
   {
     "id": "attar_005",
-    "name": "Oud Lavender",
+    "name": "Bakarat Rouje",
     "type": "attar",
-    "category": "premium",
-    "description": "A unique blend of fresh lavender with deep oud base.",
-    "notes": ["Lavender", "Oud", "Fresh"],
-    "projection": "Moderate",
-    "longevity": "8-10 hours",
-    "seasons": ["spring", "summer", "day"],
-    "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg",
-    "pricing": [
-      { "size": "3ml", "price": 350 },
-      { "size": "6ml", "price": 650 },
-      { "size": "12ml", "price": 1200 }
+    "category": "platinum",
+    "description": "Sweet luxurious fragrance inspired by Baccarat Rouge.",
+    "notes": ["Amber", "Sweet", "Woody"],
+    "projection": "Strong",
+    "longevity": "12+ hours",
+    "variants": [
+      { "size": "3ml", "price": 400, "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg" },
+      { "size": "6ml", "price": 800, "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg" },
+      { "size": "12ml", "price": 1500, "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg" }
     ]
   },
   {
     "id": "attar_006",
-    "name": "Narciso Inspired",
+    "name": "Khamrah",
     "type": "attar",
-    "category": "premium",
-    "description": "Elegant musky floral scent inspired by Narciso style.",
-    "notes": ["Musk", "Floral", "Powdery"],
-    "projection": "Moderate",
-    "longevity": "8 hours",
-    "seasons": ["spring", "day", "night"],
-    "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg",
-    "pricing": [
-      { "size": "3ml", "price": 390 },
-      { "size": "6ml", "price": 750 },
-      { "size": "12ml", "price": 1390 }
+    "category": "platinum",
+    "description": "Rich sweet gourmand fragrance with warmth.",
+    "notes": ["Vanilla", "Sweet", "Amber"],
+    "projection": "Strong",
+    "variants": [
+      { "size": "3ml", "price": 400, "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg" },
+      { "size": "6ml", "price": 800, "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg" },
+      { "size": "12ml", "price": 1500, "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg" }
     ]
   }
-  
 ]

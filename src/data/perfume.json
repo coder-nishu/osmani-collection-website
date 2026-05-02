@@ -9,10 +9,9 @@
     "projection": "Strong",
     "longevity": "6-8 hours",
     "seasons": ["spring", "summer", "day"],
-    "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg",
-    "pricing": [
-      { "size": "50ml", "price": 1200 },
-      { "size": "100ml", "price": 2200 }
+    "variants": [
+      { "size": "50ml", "price": 1200, "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg" },
+      { "size": "100ml", "price": 2200, "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg" }
     ]
   },
   {
@@ -25,10 +24,9 @@
     "projection": "Moderate",
     "longevity": "6-7 hours",
     "seasons": ["summer", "day"],
-    "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg",
-    "pricing": [
-      { "size": "50ml", "price": 1100 },
-      { "size": "100ml", "price": 2000 }
+    "variants": [
+      { "size": "50ml", "price": 1100, "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg" },
+      { "size": "100ml", "price": 2000, "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg" }
     ]
   },
   {
@@ -41,10 +39,9 @@
     "projection": "Moderate",
     "longevity": "5-6 hours",
     "seasons": ["spring", "day"],
-    "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg",
-    "pricing": [
-      { "size": "50ml", "price": 1000 },
-      { "size": "100ml", "price": 1800 }
+    "variants": [
+      { "size": "50ml", "price": 1000, "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg" },
+      { "size": "100ml", "price": 1800, "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg" }
     ]
   },
   {
@@ -57,10 +54,9 @@
     "projection": "Strong",
     "longevity": "8 hours",
     "seasons": ["winter", "fall", "night"],
-    "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg",
-    "pricing": [
-      { "size": "50ml", "price": 1500 },
-      { "size": "100ml", "price": 2800 }
+    "variants": [
+      { "size": "50ml", "price": 1500, "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg" },
+      { "size": "100ml", "price": 2800, "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg" }
     ]
   },
   {
@@ -73,10 +69,9 @@
     "projection": "Soft",
     "longevity": "5 hours",
     "seasons": ["spring", "summer", "day"],
-    "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg",
-    "pricing": [
-      { "size": "50ml", "price": 900 },
-      { "size": "100ml", "price": 1600 }
+    "variants": [
+      { "size": "50ml", "price": 900, "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg" },
+      { "size": "100ml", "price": 1600, "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg" }
     ]
   },
   {
@@ -89,10 +84,9 @@
     "projection": "Moderate",
     "longevity": "6-7 hours",
     "seasons": ["spring", "day", "night"],
-    "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg",
-    "pricing": [
-      { "size": "50ml", "price": 1200 },
-      { "size": "100ml", "price": 2100 }
+    "variants": [
+      { "size": "50ml", "price": 1200, "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg" },
+      { "size": "100ml", "price": 2100, "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg" }
     ]
   }
 ]

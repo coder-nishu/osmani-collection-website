@@ -8,8 +8,22 @@ const demoImageByType = {
     "https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=900&q=80",
 };
 
-function isExternalImage(value) {
-  return typeof value === "string" && value.startsWith("http");
+function resolveImage(value, fallbackImage) {
+  if (typeof value !== "string") {
+    return fallbackImage;
+  }
+
+  const trimmed = value.trim();
+
+  if (!trimmed) {
+    return fallbackImage;
+  }
+
+  if (trimmed.startsWith("http") || trimmed.startsWith("/")) {
+    return trimmed;
+  }
+
+  return trimmed;
 }
 
 function slugify(value) {
@@ -40,12 +54,12 @@ function mapProduct(product, slugCounts) {
 
   const variants = rawVariants.map((entry) => ({
     ...entry,
-    image: isExternalImage(entry.image) ? entry.image : fallbackImage,
+    image: resolveImage(entry.image, fallbackImage),
   }));
 
   const images = variants.length
     ? variants.map((entry) => entry.image)
-    : [isExternalImage(product.image) ? product.image : fallbackImage];
+    : [resolveImage(product.image, fallbackImage)];
 
   return {
     ...product,

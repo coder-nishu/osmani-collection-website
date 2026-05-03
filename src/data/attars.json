@@ -10,9 +10,9 @@
     "longevity": "6-8 hours",
     "seasons": ["summer", "day"],
     "variants": [
-      { "size": "3ml", "price": 300, "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg" },
-      { "size": "6ml", "price": 550, "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg" },
-      { "size": "12ml", "price": 990, "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg" }
+      { "size": "3ml", "price": 300, "image": "/attar_images/musk_al_tahara/musk_al_tahara_3ml.png" },
+      { "size": "6ml", "price": 550, "image": "/attar_images/musk_al_tahara/musk_al_tahara_6ml.png" },
+      { "size": "12ml", "price": 990, "image": "/attar_images/musk_al_tahara/musk_al_tahara_12ml.jpeg" }
     ]
   },
   {
@@ -26,9 +26,9 @@
     "longevity": "8-10 hours",
     "seasons": ["winter", "evening"],
     "variants": [
-      { "size": "3ml", "price": 300, "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg" },
-      { "size": "6ml", "price": 550, "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg" },
-      { "size": "12ml", "price": 990, "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg" }
+      { "size": "3ml", "price": 300, "image": "/attar_images/sultan/sultan_3ml.png" },
+      { "size": "6ml", "price": 550, "image": "/attar_images/sultan/sultan_6ml.png" },
+      { "size": "12ml", "price": 990, "image": "/attar_images/sultan/sultan_12ml.jpeg" }
     ]
   },
   {
@@ -42,9 +42,9 @@
     "longevity": "10-12 hours",
     "seasons": ["winter", "night"],
     "variants": [
-      { "size": "3ml", "price": 350, "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg" },
-      { "size": "6ml", "price": 650, "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg" },
-      { "size": "12ml", "price": 1250, "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg" }
+      { "size": "3ml", "price": 350, "image": "/attar_images/khanjar/khanjar_3ml.png" },
+      { "size": "6ml", "price": 650, "image": "/attar_images/khanjar/khanjar_6ml.png" },
+      { "size": "12ml", "price": 1250, "image": "/attar_images/khanjar/khanjar_12ml.jpeg" }
     ]
   },
   {
@@ -58,9 +58,9 @@
     "longevity": "8-10 hours",
     "seasons": ["summer", "day"],
     "variants": [
-      { "size": "3ml", "price": 380, "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg" },
-      { "size": "6ml", "price": 690, "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg" },
-      { "size": "12ml", "price": 1350, "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg" }
+      { "size": "3ml", "price": 380, "image": "/attar_images/red_african/red_african_3ml.png" },
+      { "size": "6ml", "price": 690, "image": "/attar_images/red_african/red_african_6ml.png" },
+      { "size": "12ml", "price": 1350, "image": "/attar_images/red_african/red_africano_12ml.jpeg" }
     ]
   },
   {
@@ -74,9 +74,9 @@
     "longevity": "12+ hours",
     "seasons": ["winter", "night"],
     "variants": [
-      { "size": "3ml", "price": 400, "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg" },
-      { "size": "6ml", "price": 800, "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg" },
-      { "size": "12ml", "price": 1500, "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg" }
+      { "size": "3ml", "price": 400, "image": "/attar_images/bakarat_rouje/bakarat_rouje_3ml.png" },
+      { "size": "6ml", "price": 800, "image": "/attar_images/bakarat_rouje/bakarat_rouje_6ml.png" },
+      { "size": "12ml", "price": 1500, "image": "/attar_images/bakarat_rouje/bakarat_rouje_12ml.jpeg" }
     ]
   },
   {
@@ -90,9 +90,9 @@
     "longevity": "12+ hours",
     "seasons": ["winter", "night"],
     "variants": [
-      { "size": "3ml", "price": 400, "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg" },
-      { "size": "6ml", "price": 800, "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg" },
-      { "size": "12ml", "price": 1500, "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg" }
+      { "size": "3ml", "price": 400, "image": "/attar_images/khamrah/khamrah_3ml.png" },
+      { "size": "6ml", "price": 800, "image": "/attar_images/khamrah/khamrah_6ml.png" },
+      { "size": "12ml", "price": 1500, "image": "/attar_images/khamrah/khamrah_12ml.jpeg" }
     ]
   },
   {
@@ -106,9 +106,9 @@
     "longevity": "6-8 hours",
     "seasons": ["summer", "day"],
     "variants": [
-      { "size": "3ml", "price": 400, "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg" },
-      { "size": "6ml", "price": 800, "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg" },
-      { "size": "12ml", "price": 1500, "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg" }
+      { "size": "3ml", "price": 400, "image": "/attar_images/rooh_al_musk/rooh_al_musk_3ml.png" },
+      { "size": "6ml", "price": 800, "image": "/attar_images/rooh_al_musk/rooh_al_musk_6ml.png" },
+      { "size": "12ml", "price": 1500, "image": "/attar_images/rooh_al_musk/ruh_al_musk_12ml.jpeg" }
     ]
   },
   {
@@ -122,9 +122,9 @@
     "longevity": "12 hours",
     "seasons": ["winter", "night"],
     "variants": [
-      { "size": "3ml", "price": 400, "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg" },
-      { "size": "6ml", "price": 800, "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg" },
-      { "size": "12ml", "price": 1500, "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg" }
+      { "size": "3ml", "price": 400, "image": "/attar_images/kiswatul_kaaba/kiswatul_kaaba_3ml.png" },
+      { "size": "6ml", "price": 800, "image": "/attar_images/kiswatul_kaaba/kiswatul_kaaba_6ml.png" },
+      { "size": "12ml", "price": 1500, "image": "/attar_images/kiswatul_kaaba/kiswatul_kaba_12ml.jpeg" }
     ]
   },
   {
@@ -138,9 +138,9 @@
     "longevity": "6-8 hours",
     "seasons": ["summer", "day"],
     "variants": [
-      { "size": "3ml", "price": 400, "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg" },
-      { "size": "6ml", "price": 800, "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg" },
-      { "size": "12ml", "price": 1500, "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg" }
+      { "size": "3ml", "price": 400, "image": "/attar_images/kaaf/kaaf_3ml.png" },
+      { "size": "6ml", "price": 800, "image": "/attar_images/kaaf/kaaf_6ml.png" },
+      { "size": "12ml", "price": 1500, "image": "/attar_images/kaaf/kaaf_12ml.jpeg" }
     ]
   },
   {
@@ -154,9 +154,9 @@
     "longevity": "12 hours",
     "seasons": ["winter", "evening"],
     "variants": [
-      { "size": "3ml", "price": 590, "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg" },
-      { "size": "6ml", "price": 1070, "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg" },
-      { "size": "12ml", "price": 2000, "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg" }
+      { "size": "3ml", "price": 590, "image": "/attar_images/mukhallat_ahmar/mukhallat_ahmar_3ml.png" },
+      { "size": "6ml", "price": 1070, "image": "/attar_images/mukhallat_ahmar/mukhallat_ahmar_6ml.png" },
+      { "size": "12ml", "price": 2000, "image": "/attar_images/mukhallat_ahmar/milhallat_12ml.jpeg" }
     ]
   },
   {
@@ -170,9 +170,9 @@
     "longevity": "10-12 hours",
     "seasons": ["all-season", "evening"],
     "variants": [
-      { "size": "3ml", "price": 630, "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg" },
-      { "size": "6ml", "price": 1220, "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg" },
-      { "size": "12ml", "price": 2390, "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg" }
+      { "size": "3ml", "price": 630, "image": "/attar_images/misk_Fakher/misk_Fakher_3ml.png" },
+      { "size": "6ml", "price": 1220, "image": "/attar_images/misk_Fakher/misk_Fakher_6ml.png" },
+      { "size": "12ml", "price": 2390, "image": "/attar_images/misk_Fakher/misk_fakher_12ml.jpeg" }
     ]
   },
   {
@@ -186,9 +186,9 @@
     "longevity": "10-12 hours",
     "seasons": ["winter", "night"],
     "variants": [
-      { "size": "3ml", "price": 380, "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg" },
-      { "size": "6ml", "price": 690, "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg" },
-      { "size": "12ml", "price": 1350, "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg" }
+      { "size": "3ml", "price": 380, "image": "/attar_images/Bakhoor/Bakhoor_3ml.png" },
+      { "size": "6ml", "price": 690, "image": "/attar_images/Bakhoor/Bakhoor_6ml.png" },
+      { "size": "12ml", "price": 1350, "image": "/attar_images/Bakhoor/BakhoorBakhoor_12ml.png" }
     ]
   },
   {
@@ -202,9 +202,9 @@
     "longevity": "8-10 hours",
     "seasons": ["spring", "evening"],
     "variants": [
-      { "size": "3ml", "price": 530, "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg" },
-      { "size": "6ml", "price": 1000, "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg" },
-      { "size": "12ml", "price": 2160, "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg" }
+      { "size": "3ml", "price": 530, "image": "/attar_images/oud_lavender/oud_lavender_3ml.png" },
+      { "size": "6ml", "price": 1000, "image": "/attar_images/oud_lavender/oud_lavender_6ml.png" },
+      { "size": "12ml", "price": 2160, "image": "/attar_images/oud_lavender/oud_lavender_12ml.png" }
     ]
   },
   {

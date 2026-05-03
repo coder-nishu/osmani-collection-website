@@ -83,7 +83,7 @@ export default function FeaturedProducts({
       </div>
 
       {/* CTA BUTTON */}
-      <div className="mt-6 flex justify-center md:justify-end relative z-[60]">
+      <div className="mt-6 flex justify-center md:justify-end relative z-[40]">
         <Link
           to={buttonHref}
           className="

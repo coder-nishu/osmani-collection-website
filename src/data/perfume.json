@@ -45,21 +45,6 @@
     ]
   },
   {
-    "id": "perfume_004",
-    "name": "Oud Wood Inspired",
-    "type": "perfume",
-    "category": "platinum",
-    "description": "Luxurious woody oud fragrance inspired by Tom Ford Oud Wood.",
-    "notes": ["Oud", "Sandalwood", "Amber"],
-    "projection": "Strong",
-    "longevity": "8 hours",
-    "seasons": ["winter", "fall", "night"],
-    "variants": [
-      { "size": "50ml", "price": 1500, "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg" },
-      { "size": "100ml", "price": 2800, "image": "https://raw.githubusercontent.com/coder-nishu/osmani_images/main/ruh%20al%20misk.jpeg" }
-    ]
-  },
-  {
     "id": "perfume_005",
     "name": "Lavender Fresh",
     "type": "perfume",

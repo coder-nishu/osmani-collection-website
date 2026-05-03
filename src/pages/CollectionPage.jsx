@@ -31,6 +31,16 @@ export default function CollectionPage({ type }) {
   const [sortBy, setSortBy] = useState("default");
   const [searchTerm, setSearchTerm] = useState("");
 
+  const filterOptions = useMemo(
+    () =>
+      type === "attar"
+        ? ["all", "oud", "musk", "sweet", "woody"]
+        : ["all", "fresh", "sweet", "woody", "strong"],
+    [type],
+  );
+
+  const effectiveFilter = filterOptions.includes(activeFilter) ? activeFilter : "all";
+
   const collectionTitle = type === "attar" ? "Attar Collection" : "Perfume Collection";
 
   const products = useMemo(() => {
@@ -48,7 +58,7 @@ export default function CollectionPage({ type }) {
     };
 
     const filtered = getProductsByType(type).filter(
-      (product) => matchesFilter(product, activeFilter) && matchesSearch(product),
+      (product) => matchesFilter(product, effectiveFilter) && matchesSearch(product),
     );
 
     if (sortBy === "price-asc") {
@@ -60,7 +70,7 @@ export default function CollectionPage({ type }) {
     }
 
     return filtered;
-  }, [type, activeFilter, sortBy, searchTerm]);
+  }, [type, effectiveFilter, sortBy, searchTerm]);
 
   return (
     <div className="min-h-screen bg-(--color-bg)">
@@ -89,7 +99,8 @@ export default function CollectionPage({ type }) {
             </div>
           </div>
           <FilterBar
-            activeFilter={activeFilter}
+            options={filterOptions}
+            activeFilter={effectiveFilter}
             onFilterChange={setActiveFilter}
             sortBy={sortBy}
             onSortChange={setSortBy}

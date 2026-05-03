@@ -14,7 +14,7 @@ export default function CartItem({ item, index, onRemove, onQuantityChange, show
   };
 
   return (
-    <div className="rounded-2xl border border-[color:var(--color-primary)]/10 bg-[color:var(--color-bg)] p-3 shadow-[0_12px_28px_rgba(23,33,25,0.08)] sm:p-4">
+    <div className="rounded-2xl border border-[color:var(--color-primary)]/10 bg-[#e6efe7] p-3 shadow-[0_12px_28px_rgba(23,33,25,0.08)] sm:p-4">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h3 className="text-sm font-semibold text-[color:var(--color-primary)]">

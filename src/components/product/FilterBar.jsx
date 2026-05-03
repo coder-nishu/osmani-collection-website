@@ -1,10 +1,16 @@
-const filterOptions = ["all", "sweet", "strong", "fresh"];
+const defaultOptions = ["all", "sweet", "strong", "fresh"];
 
-export default function FilterBar({ activeFilter, onFilterChange, sortBy, onSortChange }) {
+export default function FilterBar({
+  options = defaultOptions,
+  activeFilter,
+  onFilterChange,
+  sortBy,
+  onSortChange,
+}) {
   return (
     <div className="mb-8 flex flex-col gap-4 rounded-2xl bg-[color:var(--color-primary)]/5 px-4 py-4 sm:flex-row sm:items-center sm:justify-between">
       <div className="flex flex-wrap gap-2">
-        {filterOptions.map((option) => {
+        {options.map((option) => {
           const isActive = activeFilter === option;
           return (
             <button

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../components/common/Navbar";
 import Footer from "../components/common/Footer";
@@ -8,14 +8,9 @@ import { getCart, removeFromCart, updateCartItemQuantity } from "../utils/cartSt
 import { formatPrice } from "../utils/helpers";
 
 const API_URL =
-  "https://script.google.com/macros/s/AKfycbxIbXNaJ5hz5bmGLgZ6VD39pbgKpPU5Gfddvj2Z5IPIH84OQfme9S_7ZtK26bNP1L4QwA/exec";
-const RAW_WHATSAPP_NUMBER = "01628311569";
-const WHATSAPP_NUMBER = RAW_WHATSAPP_NUMBER.startsWith("0")
-  ? `880${RAW_WHATSAPP_NUMBER.slice(1)}`
-  : RAW_WHATSAPP_NUMBER;
+  "https://script.google.com/macros/s/AKfycbygAhvV57sg7u9EF7nbfJwl98sLKCqEs-2oLF8mokVYFqM6X_awJXhyxluTqr8pY8Rx8Q/exec";
 const PROCESSING_STAGE_MS = 1500;
 const SUCCESS_STAGE_MS = 1000;
-const REDIRECT_DELAY_MS = PROCESSING_STAGE_MS + SUCCESS_STAGE_MS + 500;
 
 const initialFormState = {
   name: "",
@@ -46,7 +41,7 @@ export default function CheckoutPage() {
     };
   }, []);
 
-  const total = useMemo(
+  const subtotal = useMemo(
     () =>
       cartItems.reduce(
         (sum, item) =>
@@ -55,6 +50,10 @@ export default function CheckoutPage() {
       ),
     [cartItems],
   );
+
+  const discountRate = 0.1;
+  const discountAmount = subtotal * discountRate;
+  const total = Math.max(subtotal - discountAmount, 0);
 
   const handleRemove = (index) => {
     setCartItems(removeFromCart(index));
@@ -77,6 +76,7 @@ export default function CheckoutPage() {
 
   const validate = () => {
     const nextErrors = {};
+    const digitsOnlyPhone = formValues.phone.replace(/\D/g, "");
 
     if (!formValues.name.trim()) {
       nextErrors.name = "Name is required.";
@@ -84,6 +84,8 @@ export default function CheckoutPage() {
 
     if (!formValues.phone.trim()) {
       nextErrors.phone = "Phone number is required.";
+    } else if (digitsOnlyPhone.length !== 11) {
+      nextErrors.phone = "Phone number must be 11 digits.";
     }
 
     if (!formValues.address.trim()) {
@@ -98,31 +100,6 @@ export default function CheckoutPage() {
     return Object.keys(nextErrors).length === 0;
   };
 
-  const buildWhatsAppMessage = useCallback(
-    (items, totalAmount) => {
-      const itemsText = items
-        .map(
-          (item) =>
-            `* ${item.name} (${item.size}) x${Number(item.quantity || 1)}`,
-        )
-        .join("\n");
-
-      return [
-        "Hi, I placed an order.",
-        "",
-        `Name: ${formValues.name.trim()}`,
-        `Phone: ${formValues.phone.trim()}`,
-        `Address: ${formValues.address.trim()}`,
-        "",
-        "Items:",
-        itemsText,
-        "",
-        `Total: ${formatPrice(totalAmount)}`,
-      ].join("\n");
-    },
-    [formValues],
-  );
-
   useEffect(() => {
     if (!isModalOpen) {
       return undefined;
@@ -134,27 +111,21 @@ export default function CheckoutPage() {
       setModalStage("success");
     }, PROCESSING_STAGE_MS);
 
-    const redirectTimer = window.setTimeout(() => {
-      const message = buildWhatsAppMessage(orderSnapshot.items, orderSnapshot.total);
-      const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
-
-      window.localStorage.removeItem("cart_items");
-      window.dispatchEvent(new CustomEvent("cart:updated"));
-      setCartItems([]);
-      setFormValues(initialFormState);
-      setFormErrors({});
-      setIsCodChecked(false);
-      setIsSubmitting(false);
-      setIsModalOpen(false);
-
-      window.location.href = whatsappUrl;
-    }, REDIRECT_DELAY_MS);
-
     return () => {
       window.clearTimeout(successTimer);
-      window.clearTimeout(redirectTimer);
     };
-  }, [isModalOpen, orderSnapshot, buildWhatsAppMessage]);
+  }, [isModalOpen]);
+
+  const handleModalClose = () => {
+    window.localStorage.removeItem("cart_items");
+    window.dispatchEvent(new CustomEvent("cart:updated"));
+    setCartItems([]);
+    setFormValues(initialFormState);
+    setFormErrors({});
+    setIsCodChecked(false);
+    setIsSubmitting(false);
+    setIsModalOpen(false);
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -237,13 +208,19 @@ export default function CheckoutPage() {
                   onQuantityChange={handleQuantityChange}
                 />
               ))}
-              <div className="mt-6 flex items-center justify-between rounded-2xl border border-(--color-primary)/10 bg-(--color-surface)/70 px-5 py-4">
-                <span className="text-sm uppercase tracking-[0.2em] text-(--color-primary)/70">
-                  Total
-                </span>
-                <span className="text-lg font-semibold text-(--color-primary)">
-                  {formatPrice(total)}
-                </span>
+              <div className="mt-6 rounded-2xl border border-(--color-primary)/10 bg-(--color-surface)/70 px-5 py-4">
+                <div className="flex items-center justify-between text-[11px] uppercase tracking-[0.2em] text-(--color-primary)/60">
+                  <span>Subtotal</span>
+                  <span>{formatPrice(subtotal)}</span>
+                </div>
+                <div className="mt-2 flex items-center justify-between rounded-full bg-[color:var(--color-accent)]/15 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-[color:var(--color-primary)]">
+                  <span>Discount 10%</span>
+                  <span>-{formatPrice(discountAmount)}</span>
+                </div>
+                <div className="mt-3 flex items-center justify-between text-base font-semibold text-(--color-primary)">
+                  <span>Total</span>
+                  <span>{formatPrice(total)}</span>
+                </div>
               </div>
             </div>
 
@@ -289,8 +266,10 @@ export default function CheckoutPage() {
                     value={formValues.phone}
                     onChange={handleChange}
                     disabled={isSubmitting || isModalOpen}
+                    inputMode="numeric"
+                    pattern="\d{11}"
                     className="mt-2 w-full rounded-2xl border border-(--color-primary)/15 bg-white/70 px-4 py-3 text-sm text-(--color-primary) focus:border-(--color-accent) focus:outline-none"
-                    placeholder="Phone number"
+                    placeholder="11-digit mobile number"
                     required
                   />
                   {formErrors.phone ? (
@@ -366,6 +345,7 @@ export default function CheckoutPage() {
         stage={modalStage}
         items={orderSnapshot.items}
         total={orderSnapshot.total}
+        onClose={handleModalClose}
       />
     </div>
   );

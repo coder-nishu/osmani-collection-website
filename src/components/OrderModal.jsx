@@ -1,6 +1,6 @@
 import { formatPrice } from "../utils/helpers";
 
-export default function OrderModal({ isOpen, stage, items, total }) {
+export default function OrderModal({ isOpen, stage, items, total, onClose }) {
   if (!isOpen) {
     return null;
   }
@@ -17,6 +17,14 @@ export default function OrderModal({ isOpen, stage, items, total }) {
         aria-modal="true"
         aria-live="polite"
       >
+        <button
+          type="button"
+          onClick={onClose}
+          aria-label="Close order status"
+          className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full border border-(--color-primary)/15 bg-white/90 text-(--color-primary) transition hover:border-(--color-accent) hover:text-(--color-accent)"
+        >
+          x
+        </button>
         <div key={stage} className="space-y-5 transition-all duration-300">
           {stage === "processing" ? (
             <>
@@ -61,9 +69,12 @@ export default function OrderModal({ isOpen, stage, items, total }) {
                 <p className="text-sm text-[color:var(--color-primary)]/70">
                   We will call you to confirm
                 </p>
+                <p className="text-xs text-[color:var(--color-primary)]/60">
+                  Delivery fee depends on location: Inside Dhaka 70 tk, outside Dhaka 120 tk.
+                </p>
               </div>
               <p className="text-xs text-[color:var(--color-primary)]/60">
-                Redirecting to WhatsApp...
+                Tap the close button to continue.
               </p>
             </>
           )}
